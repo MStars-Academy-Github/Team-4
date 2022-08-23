@@ -21,8 +21,8 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     lastName: lastName,
   });
 
-  console.log(foundUser);
-
+  console.log(hashedPassword);
+  //   password = hashedPassword;
   if (foundUser) {
     res.json({
       success: false,
@@ -30,13 +30,13 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     });
   } else {
     const createdUser = await Users.create({
-      firstName,
-      lastName,
-      age,
-      gender,
-      hobby,
-      imgUrl,
-      hashedPassword,
+      firstName: firstName,
+      lastName: lastName,
+      age: age,
+      gender: gender,
+      hobby: hobby,
+      imgUrl: imgUrl,
+      password: hashedPassword,
     });
 
     if (createdUser) {
@@ -76,13 +76,14 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   console.log(body);
-
-  const hashedPassword = await bcrypt.hash(body.password, 10);
   const userChecker = await Users.findOne({
     firstName: body.username,
-    password: hashedPassword,
   });
-  if (userChecker) {
+
+  console.log(userChecker);
+  const checkedPassword = (userChecker && userChecker.password) || "not";
+
+  if (await bcrypt.compare(body.password, checkedPassword)) {
     res.json({
       success: true,
       message: "Login successfully",
