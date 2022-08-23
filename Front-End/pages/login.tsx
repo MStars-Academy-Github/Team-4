@@ -21,7 +21,7 @@ export default function login() {
                 <input type="password" placeholder="Password" />
               </div>
               <div className="inputBox">
-                <input type="submit" value="Login" />
+                <button type="submit">Login</button>
               </div>
             </form>
           </div>
