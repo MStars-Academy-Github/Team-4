@@ -4,15 +4,14 @@ export default function login() {
   const login = (e: any) => {
     e.preventDefault();
     const firstName = e.target[0].value;
-
+    console.log(e.target[1].value);
     const password = e.target[1].value;
     axios
       .post("http://localhost:3001/users/login", {
         firstName: firstName,
-
         password: password,
       })
-      .then((res) => console.log(res.status))
+      .then((res) => console.log(res))
       .catch((error) => console.error(error));
   };
 

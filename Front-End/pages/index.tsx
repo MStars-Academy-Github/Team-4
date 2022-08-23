@@ -2,33 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { useEffect } from "react";
+import "fa-icons";
 
 const Home: NextPage = () => {
-  useEffect(() => {
-    document.addEventListener("mousemove", function (e) {
-      let body = document.querySelector("body");
-      let heart = document.createElement("span");
-      let x = e.offsetX;
-      let y = e.offsetY;
-      heart.style.left = x + "px";
-      heart.style.top = y + "px";
-
-      let size = Math.random() * 10;
-      heart.style.width = 5 + size + "px";
-      heart.style.height = 5 + size + "px";
-
-      let transformValue = Math.random() * 360;
-      heart.style.transform = "rotate(" + transformValue + "deg)";
-
-      body?.appendChild(heart);
-
-      setTimeout(function () {
-        heart.remove();
-      }, 1000);
-    });
-  }, []);
-
   return (
     <div className={styles.container}>
       <Head>

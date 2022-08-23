@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff&display=swap");
+.icons .iconTag {
+  font-family: DynaPuff;
+  font-size: 30px;
+  margin-top: 8px;
+}
+.navbars a {
+  color: #fff;
+}
+.header {
+  width: 100%;
+}
+.icons {
+  width: 250px;
+  height: 50px;
+  display: flex;
+  margin-top: 5px;
+  color: red;
+}
+.icons img {
+  transform: rotate(45deg);
+}
+.imgMen {
+  width: 150px;
+  height: 250px;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+.imgWomen {
+  width: 150px;
+  height: 250px;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+}
+.heart {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 35%;
+  left: 48%;
+}
