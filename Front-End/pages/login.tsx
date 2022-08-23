@@ -6,6 +6,7 @@ export default function login() {
     const firstName = e.target[0].value;
     console.log(e.target[1].value);
     const password = e.target[1].value;
+
     axios
       .post("http://localhost:3001/users/login", {
         firstName: firstName,
