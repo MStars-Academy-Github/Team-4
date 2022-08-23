@@ -1,20 +1,19 @@
+import axios from "axios";
+
 export default function login() {
-  const loginHandler = async (e: any) => {
+  const login = (e: any) => {
     e.preventDefault();
-    const data = {
-      username: e.target[0].value,
-      password: e.target[1].value,
-    };
-    fetch("https://localhost:3001/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target[0].value,
-        password: e.target[1].value,
-      }),
-    });
+    const firstName = e.target[0].value;
+
+    const password = e.target[1].value;
+    axios
+      .post("http://localhost:3001/users/login", {
+        firstName: firstName,
+
+        password: password,
+      })
+      .then((res) => console.log(res.status))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -31,12 +30,12 @@ export default function login() {
         <div className="container relative w-[400px] min-h-[400px]">
           <div className="loginForm relative w-full h-full p-[40px]">
             <h2>Login Form</h2>
-            <form onSubmit={loginHandler}>
+            <form onSubmit={login}>
               <div className="inputBox">
-                <input type="text" placeholder="Username" />
+                <input type="text" placeholder="Username" name="username" />
               </div>
               <div className="inputBox">
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Password" name="password" />
               </div>
               <div className="inputBox">
                 <button type="submit">Login</button>
