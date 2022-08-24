@@ -4,21 +4,111 @@
   font-size: 30px;
   margin-top: 8px;
 }
-.navbars a {
+.banner {
+  background: blue;
+}
+.navbars ul {
+  position: relative;
+  display: flex;
+  z-index: 2;
+}
+.navbars {
+  margin-left: 50px;
+}
+.navbars ul li {
+  position: relative;
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 2em;
+  box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  transition: 0.5s;
+  overflow: hidden;
+  margin-right: 20px;
+}
+.navbars ul li a:hover {
+  transform: translateY(-10px);
+  transition: 0.5s;
+}
+.navbars ul li a {
+  font-size: 15px;
 }
 .header {
   width: 100%;
 }
 .icons {
-  width: 250px;
+  width: 350px;
   height: 50px;
   display: flex;
   margin-top: 5px;
+  margin-left: 15px;
 }
 .icons img {
   transform: rotate(45deg);
 }
+
+.contactIconContainer {
+  margin-left: 150px;
+  margin-top: 5px;
+}
+.contactIconContainer ul {
+  position: relative;
+  display: flex;
+  z-index: 2;
+}
+.contactIconContainer ul li {
+  position: relative;
+  list-style: none;
+  margin: 10px;
+}
+.contactIconContainer ul a {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 2em;
+  box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.contactIconContainer ul a :hover {
+  transform: translateY(-10px);
+  transition: 0.5s;
+}
+.contactIconContainer ul a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(45deg) translateX(60px);
+  transition: 0.5s;
+}
+.contactIconContainer ul a:hover::before {
+  transform: skewX(45deg) translateX(-60px);
+}
+
 .imgMen {
   width: 150px;
   height: 250px;

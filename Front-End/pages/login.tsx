@@ -37,6 +37,10 @@ export default function login() {
               <div className="inputBox">
                 <input type="password" placeholder="Password" name="password" />
               </div>
+              <a className="text-[#fff] mt-2 flex justify-end" href="/register">
+                Бүртгүүлэх
+              </a>
+              <p className="result mt-2">Нэр эсвэл нууц үг буруу байна.</p>
               <div className="inputBox">
                 <button type="submit">Login</button>
               </div>
