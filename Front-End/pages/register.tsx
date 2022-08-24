@@ -5,6 +5,7 @@ import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 export default function register() {
   const [change, setChange] = useState<any>([]);
   const data = ["serious", "pen pal", "romantic", "flirty", "nothing"];
+  console.log(change);
 
   const Name = (e: any) => {
     e.preventDefault();
@@ -16,24 +17,22 @@ export default function register() {
     const hobby = change.toString();
     const imgUrl = e.target[5].value;
     const password = e.target[6].value;
-    console.log(hobby);
 
-    // axios
-    //   .post("http://localhost:3001/users", {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     imgUrl: imgUrl,
-    //     age: age,
-    //     gender: gender,
-    //     hobby: hobby,
-    //     password: password,
-    //   })
-    //   .then((res) => console.log(res.status))
-    //   .catch((error) => console.error(error));
+    axios
+      .post("http://localhost:3001/users", {
+        firstName: firstName,
+        lastName: lastName,
+        imgUrl: imgUrl,
+        age: age,
+        gender: gender,
+        hobby: hobby,
+        password: password,
+      })
+      .then((res) => console.log(res.status))
+      .catch((error) => console.error(error));
   };
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
-      <pre>{change}</pre>
       <div className="color"></div>
       <div className="color"></div>
       <div className="color"></div>
@@ -81,15 +80,14 @@ export default function register() {
                 {data.map((e, i) => {
                   return (
                     <div key={i}>
-                      <input
-                        type="checkbox"
+                      <button
+                        type="button"
                         name="interest"
                         id="interest"
                         onClick={() => {
                           setChange([...change, e]);
                         }}
-                      />
-                      <button className="interest mt-5 absolute ml-[-75px]">
+                      >
                         {e}
                       </button>
                     </div>

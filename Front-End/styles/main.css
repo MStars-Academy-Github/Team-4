@@ -4,9 +4,6 @@
   font-size: 30px;
   margin-top: 8px;
 }
-.banner {
-  background: blue;
-}
 .navbars ul {
   position: relative;
   display: flex;
@@ -44,6 +41,8 @@
 }
 .header {
   width: 100%;
+  position: absolute;
+  top: 0;
 }
 .icons {
   width: 350px;

@@ -170,10 +170,6 @@ section .color:nth-child(3) {
   width: 60px;
   height: 60px;
 }
-.result {
-  color: #fff;
-  display: none;
-}
 .checkboxGender label svg {
   width: 25px;
   height: 25px;
@@ -191,7 +187,7 @@ section .color:nth-child(3) {
   flex-wrap: wrap;
   width: 350px;
 }
-.inputCheckbox input {
+.inputCheckbox button {
   width: 100px;
   height: 50px;
   border: 1px solid #f5f5f5;
@@ -203,18 +199,26 @@ section .color:nth-child(3) {
   transition: 0.5s;
 }
 .interest {
-  font-size: 13px;
   color: #666;
   font-weight: 500;
 }
-.inputCheckbox input:hover {
+.inputCheckbox button:hover {
   background: rgb(159, 158, 158);
 }
-.inputCheckbox input:checked {
+.inputCheckbox button:focus {
   background: #333030;
   border-color: #333030;
   transition: 0.5s;
 }
 .interestText {
   color: rgb(94, 88, 88);
+}
+.registerButton {
+  color: rgb(94, 88, 88);
+  justify-content: end;
+  display: flex;
+  margin-top: 15px;
+}
+.result {
+  color: #fff;
 }

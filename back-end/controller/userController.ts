@@ -87,7 +87,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   if (await bcrypt.compare(body.password, checkedPassword)) {
     res.json({
       success: true,
-      message: "Login successfully",
+      message: "Амжилттай нэвтэрлээ",
     });
   } else {
     res.json({
