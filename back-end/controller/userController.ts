@@ -12,49 +12,136 @@ const getUsers = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  const { firstName, lastName, age, gender, hobby, imgUrl, password } =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    age,
+    gender,
+    hobby,
+    imgUrl,
+    password,
+    username,
+  } = req.body;
   console.log(req.body);
   const hashedPassword = await bcrypt.hash(password, 10);
   const foundUser = await Users.findOne({
-    firstName: firstName,
-    lastName: lastName,
+    username: username,
   });
 
-  console.log(hashedPassword);
-  //   password = hashedPassword;
   if (foundUser) {
     res.json({
       success: false,
-      data: "User already exists",
+      data: "Username already exists",
     });
   } else {
-    const createdUser = await Users.create({
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      gender: gender,
-      hobby: hobby,
-      imgUrl: imgUrl,
-      password: hashedPassword,
-    });
-
-    if (createdUser) {
-      res.json({
-        success: true,
-        message: "user creation successful",
-        data: createUser,
+    if (age >= 18) {
+      const createdUser = await Users.create({
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        age: age,
+        gender: gender,
+        hobby: hobby,
+        imgUrl: imgUrl,
+        password: hashedPassword,
       });
+      if (createdUser) {
+        res.json({
+          success: true,
+          message: "user creation successful",
+          data: createUser,
+        });
+      } else {
+        res.json({
+          success: false,
+          message: "user creation unsuccessful",
+          data: {},
+        });
+      }
     } else {
       res.json({
         success: false,
-        message: "user creation unsuccessful",
-        data: {},
+        message: "age must be over 18",
       });
     }
   }
 };
 
+const getUsersByFilter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const body = req.body;
+
+  const findUser = await Users.find({ username: body.username });
+
+  if (findUser) {
+    const user = findUser[0];
+    console.log(findUser);
+    const interestedGender = await Users.find({
+      gender: { $regex: `[^${user.gender}]` },
+    });
+    let interest = await Users.find({ hobby: user.hobby });
+    if (user.hobby == "nothing") {
+      interest = interestedGender;
+    } else {
+      interest = await Users.find({ hobby: user.hobby });
+    }
+    res.json({
+      success: true,
+      message: "sending interested people",
+      data: {
+        gender: interestedGender,
+        interest: interest,
+      },
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "user not found",
+    });
+  }
+};
+const sendRequest = async (req: Request, res: Response, next: NextFunction) => {
+  const request = req.body;
+  console.log(request);
+
+  res.json({
+    message: "this is testing",
+  });
+};
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  const findUser = await Users.find({ username: body.username });
+  console.log(findUser);
+  console.log(findUser[0]._id.toString());
+
+  if (findUser) {
+    const myquery = { _id: findUser[0]._id.toString() };
+    const newvalues = { username: body.fixedname };
+    await Users.updateOne({
+      myquery,
+      newvalues,
+      function(err: Error, res: Response) {
+        if (err) throw err;
+      },
+    });
+    res.json({
+      before: {
+        username: findUser[0].username,
+      },
+      after: {
+        username: body.fixedname,
+      },
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "this user doesn't exist",
+    });
+  }
+};
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   console.log(body);
@@ -78,7 +165,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   console.log(body);
 
   const userChecker = await Users.findOne({
-    firstName: body.firstName,
+    username: body.username,
   });
 
   console.log(userChecker);
@@ -97,4 +184,12 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { getUsers, createUser, deleteUser, loginUser };
+export default {
+  getUsers,
+  createUser,
+  deleteUser,
+  loginUser,
+  getUsersByFilter,
+  sendRequest,
+  updateUser,
+};
