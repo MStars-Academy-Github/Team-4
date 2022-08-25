@@ -169,7 +169,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
-  console.log(body);
+  // console.log(body);
 
   const userChecker = await Users.findOne({
     username: body.username,

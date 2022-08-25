@@ -202,12 +202,17 @@ section .color:nth-child(3) {
   color: #666;
   font-weight: 500;
 }
-.inputCheckbox button:hover {
+/* .inputCheckbox button:hover {
   background: rgb(159, 158, 158);
-}
-.inputCheckbox button:focus {
+} */
+/* .inputCheckbox button:focus {
   background: #333030;
   border-color: #333030;
+  transition: 0.5s;
+} */
+.checked {
+  background: #333030 !important;
+  border-color: #333030 !important;
   transition: 0.5s;
 }
 .interestText {

@@ -3,23 +3,55 @@ import { useState } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 
 export default function register() {
-  const [change, setChange] = useState<any>([]);
+  const [change, setChange] = useState<string[]>([]);
+  const [classType, setClassType] = useState<boolean>();
+
+  const [check, setCheck] = useState<boolean>(true);
   const data = ["serious", "pen pal", "romantic", "flirty", "nothing"];
   console.log(change);
+  let counting = 0;
+  function doubleChecker(e: string) {
+    setCheck(false);
+    // setClassType(!classType);
+    const value = change.includes(e);
+    console.log(value);
 
+    if (value) {
+      const index = change.indexOf(e);
+      change.splice(index, 1);
+      setChange(change);
+      console.log(change);
+      // setClassType("");
+    } else {
+      setChange([...change, e]);
+    }
+  }
   const Name = (e: any) => {
     e.preventDefault();
 
-    const firstName = e.target[0].value;
-    const lastName = e.target[1].value;
-    const age = e.target[4].value;
-    const gender = e.target[2].value == "on" ? "male" : "female";
+    const username = e.target[0].value;
+    const firstName = e.target[0 + 1].value;
+    const lastName = e.target[1 + 1].value;
+    const age = e.target[4 + 1].value;
+    const gender = e.target[2 + 1].value == "on" ? "male" : "female";
     const hobby = change.toString();
-    const imgUrl = e.target[5].value;
-    const password = e.target[6].value;
+    const imgUrl = e.target[5 + 1].value;
+    const password = e.target[6 + 1].value;
+    const data = [
+      username,
+      firstName,
+      lastName,
+      age,
+      gender,
+      hobby,
+      imgUrl,
+      password,
+    ];
+    console.log(data);
 
     axios
       .post("http://localhost:3001/users", {
+        username: username,
         firstName: firstName,
         lastName: lastName,
         imgUrl: imgUrl,
@@ -46,6 +78,9 @@ export default function register() {
           <div className="loginForm relative w-full h-full p-[40px]">
             <h2>Register Form</h2>
             <form action="" onSubmit={Name}>
+              <div className="inputBoxRegister">
+                <input type="text" placeholder="username" name="username" />
+              </div>
               <div className="inputBoxRegister">
                 <input type="text" placeholder="first name" name="firstname" />
               </div>
@@ -81,11 +116,14 @@ export default function register() {
                   return (
                     <div key={i}>
                       <button
+                        className={
+                          change.includes(e) ? "checked " : "text-[#7c7878] "
+                        }
                         type="button"
-                        name="interest"
+                        name={e}
                         id="interest"
-                        onClick={() => {
-                          setChange([...change, e]);
+                        onClick={async () => {
+                          doubleChecker(e);
                         }}
                       >
                         {e}
@@ -93,6 +131,14 @@ export default function register() {
                     </div>
                   );
                 })}
+                <input
+                  type="button"
+                  value="clear"
+                  className="text-red-600 ml-5 mt-3 mb-auto border border-red-600 rounded-lg h-10 flex w-20 justify-center "
+                  onClick={() => {
+                    setChange([]);
+                  }}
+                />
               </div>
               <div className="inputBox">
                 <button type="submit">Submit</button>
