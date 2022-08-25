@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema({
+  username: {
+    type: String,
+  },
   firstName: {
     type: String,
   },
