@@ -2,18 +2,33 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
+type Result = {
+  data: {
+    _id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    imgUrl: string;
+    password: string;
+    gender: string;
+    age: number;
+    __v: number;
+  };
+  message: string;
+  success: boolean;
+};
 export default function Login() {
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<Result>();
 
   const router = useRouter();
   const login = (e: any) => {
     e.preventDefault();
-    const firstName = e.target[0].value;
+    const username = e.target[0].value;
     const password = e.target[1].value;
 
     axios
       .post("http://localhost:3001/users/login", {
-        firstName: firstName,
+        username: username,
         password: password,
       })
       .then((res) => {
@@ -21,9 +36,10 @@ export default function Login() {
       })
       .catch((error) => console.error(error));
   };
+  console.log(result);
 
   useEffect(() => {
-    if (result !== undefined) {
+    if (result !== undefined && result.message) {
       localStorage.setItem("result", JSON.stringify(result));
     }
   }, [result]);
@@ -48,11 +64,10 @@ export default function Login() {
               <div className="inputBox">
                 <input type="password" placeholder="Password" name="password" />
               </div>
-              <p className="result text-[#fff]">aaa</p>
+              <p className="result text-[#fff]">{result?.message}</p>
               <a className="registerButton" href="/register">
                 Бүртгүүлэх
               </a>
-
               <div className="inputBox">
                 <button type="submit">Login</button>
               </div>

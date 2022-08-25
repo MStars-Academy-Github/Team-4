@@ -141,6 +141,7 @@
   margin: 0 auto;
   box-shadow: 0 6px 20px rgb(0 0 0 / 5%);
   backdrop-filter: blur(16px);
+  margin-right: 10px;
 }
 .cardInside {
   display: flex;
@@ -177,7 +178,7 @@
   border-radius: 50%;
   position: absolute;
   top: 74px;
-  left: 45%;
+  left: 187px;
 }
 .findP {
   color: #404040;
@@ -224,4 +225,74 @@
   text-align: center;
   justify-content: center;
   top: 10%;
+}
+.allUsers {
+  width: 1000px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 5px;
+  filter: blur(-25px);
+}
+.usersCard img {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px 20px 20px 20px;
+  position: relative;
+  left: 40px;
+  top: -25px;
+}
+.usersCard {
+  width: 150px;
+  height: 100px;
+  background: #fff;
+  border-radius: 20px 20px 20px 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.usersCard:hover {
+  width: 250px;
+  transition: 0.5s;
+  height: 200px;
+}
+.mainContainer {
+  width: 1200px;
+  height: 700px;
+  display: flex;
+  justify-content: space-between;
+}
+.age {
+  font-size: 20px;
+  font-weight: 700;
+}
+.ageText {
+  color: rgb(72, 66, 66);
+  font-weight: 400;
+  font-size: 20px;
+}
+.hobby {
+  flex-direction: column;
+  display: flex;
+}
+.information {
+  display: none;
+}
+
+.usersCard:hover img {
+  width: 100px;
+  height: 100px;
+  left: 80px;
+  transition: 0.5s;
+}
+.usersCard:hover .information {
+  display: flex;
+  transition: 0.5s;
+}
+.userName {
+  font-family: DynaPuff;
+  font-size: 25px;
+  color: #fff;
+  position: relative;
+  left: 450px;
+  margin-top: 15px;
 }
