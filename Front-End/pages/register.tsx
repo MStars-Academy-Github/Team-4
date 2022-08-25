@@ -33,6 +33,7 @@ export default function register() {
   };
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
+      <pre>{change}</pre>
       <div className="color"></div>
       <div className="color"></div>
       <div className="color"></div>
@@ -80,16 +81,16 @@ export default function register() {
                 {data.map((e, i) => {
                   return (
                     <div key={i}>
-                      <button
-                        type="button"
+                      <input
+                        type="checkbox"
                         name="interest"
                         id="interest"
-                        onClick={() => {
+                        onChange={() => {
                           setChange([...change, e]);
                         }}
-                      >
-                        {e}
-                      </button>
+                      />
+
+                      <label htmlFor="interest">{e}</label>
                     </div>
                   );
                 })}

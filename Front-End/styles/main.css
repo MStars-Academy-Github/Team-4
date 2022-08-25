@@ -129,3 +129,99 @@
   top: 35%;
   left: 48%;
 }
+.card {
+  width: 500px;
+  height: 600px;
+  background: #fff;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 5%);
+  backdrop-filter: blur(16px);
+}
+.cardInside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 450px;
+}
+.cardInside h2 {
+  position: relative;
+  top: 0%;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+.cardInside img {
+  width: 50px;
+  position: absolute;
+  top: 5%;
+  transform: rotate(45deg);
+}
+.datingMn {
+  font-family: DynaPuff;
+  position: absolute;
+  top: 11%;
+  left: 36%;
+  font-size: 25px;
+}
+.dot {
+  width: 5px;
+  background: red;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 74px;
+  left: 45%;
+}
+.findP {
+  color: #404040;
+  text-align: center;
+  position: relative;
+  top: 3%;
+}
+.cardInside h3 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  top: 8%;
+}
+.buttonNext {
+  width: 350px;
+  height: 40px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: red;
+  color: #fff;
+  position: relative;
+  top: 15%;
+}
+.hobbyCheckBox button {
+  width: 100px;
+  height: 50px;
+  border: 1px solid #f5f5f5;
+  border-radius: 20px 20px 20px 20px;
+  appearance: none;
+  margin-top: 10px;
+  margin-left: 5px;
+  background: #f5f5f5;
+  transition: 0.5s;
+  margin-bottom: 10px;
+}
+.hobbyCheckBox button:hover {
+  background: #a09d9d;
+}
+
+.hobbyCheckBox {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  top: 10%;
+}
