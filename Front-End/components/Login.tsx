@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function Login() {
   const [result, setResult] = useState();
+
   const router = useRouter();
   const login = (e: any) => {
     e.preventDefault();
@@ -16,11 +17,16 @@ export default function Login() {
         password: password,
       })
       .then((res) => {
-        setResult(res.data.message);
+        setResult(res.data);
       })
       .catch((error) => console.error(error));
   };
 
+  useEffect(() => {
+    if (result !== undefined) {
+      localStorage.setItem("result", JSON.stringify(result));
+    }
+  }, [result]);
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
       <div className="color"></div>
@@ -42,7 +48,7 @@ export default function Login() {
               <div className="inputBox">
                 <input type="password" placeholder="Password" name="password" />
               </div>
-              <p className="result">{result}</p>
+              <p className="result text-[#fff]">aaa</p>
               <a className="registerButton" href="/register">
                 Бүртгүүлэх
               </a>
