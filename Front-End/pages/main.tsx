@@ -3,6 +3,7 @@ import { GrTwitter } from "react-icons/gr";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { useState, useEffect } from "react";
+import { MdSystemUpdateAlt } from "react-icons/md";
 import axios from "axios";
 export default function Main() {
   const [hobby, setHobbys] = useState<any>([]);
@@ -32,7 +33,15 @@ export default function Main() {
           <h3 className="iconTag">Find Your Love</h3>
           <img className="heartIcon" src="./pictures/heart-icon.png" alt="" />
         </div>
-        <p className="userName">{users.data.username}</p>
+        <div className="w-[150px] absolute left-[70%] h-[50px] flex justify-around">
+          <p className="userName">{users.data.username}</p>
+          <MdSystemUpdateAlt
+            className="updateIcon"
+            target="_blank"
+            href="/userupdate"
+          />
+        </div>
+
         <div className="contactIconContainer justify-end">
           <ul>
             <li>
