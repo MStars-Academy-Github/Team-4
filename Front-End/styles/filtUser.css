@@ -1,0 +1,103 @@
+.card {
+  width: 500px;
+  height: 600px;
+  background: #fff;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 5%);
+  backdrop-filter: blur(16px);
+  margin-right: 10px;
+}
+.filterCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 450px;
+}
+.filterCard .datingMn {
+  font-family: DynaPuff;
+  position: absolute;
+  top: 11%;
+  left: 36%;
+  font-size: 25px;
+}
+.filterCard .dot {
+  width: 5px;
+  background: red;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 74px;
+  left: 225px;
+}
+.filterCard img {
+  width: 50px;
+  position: absolute;
+  top: 5%;
+  left: 47%;
+  transform: rotate(45deg);
+}
+.filterCard .attract {
+  font-size: 20px;
+  text-align: center;
+  position: relative;
+  top: -20%;
+}
+.gendersIcon svg {
+  width: 25px;
+  color: red;
+  height: 25px;
+  margin-left: 15px;
+}
+.genderContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}
+.seekingIcon label svg {
+  width: 25px;
+  height: 25px;
+  color: blue;
+  margin-right: 5px;
+  margin-left: 5px;
+  position: relative;
+  top: 25%;
+}
+.seeking input {
+  display: flex;
+  position: relative;
+  top: 25%;
+}
+.seeking input label svg:nth-child(1) {
+  border: 5px solid black;
+}
+.seekingIcon .iconFemale {
+  color: red;
+  width: 25px;
+  height: 25px;
+}
+.gendersIcon p {
+  font-size: 25px;
+  font-weight: 500;
+}
+.seeking p {
+  font-size: 25px;
+  font-weight: 500;
+}
+.buttonSubmit {
+  width: 350px;
+  height: 40px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: red;
+  color: #fff;
+  position: absolute;
+  top: 65%;
+  left: 15%;
+  text-align: center;
+}

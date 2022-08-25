@@ -21,7 +21,16 @@ export default function Main() {
       setUser1(JSON.parse(localStorage.getItem("result") || "[]"));
     }
   }, []);
-  // console.log(users);
+  console.log(hobby);
+  const handle = (e: any) => {
+    const a = user
+      .filter((u: any) => u.hobby == hobby)
+      .map((b: any) => {
+        return b;
+      });
+    console.log(a);
+    setUsers(a);
+  };
 
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
@@ -34,7 +43,7 @@ export default function Main() {
           <img className="heartIcon" src="./pictures/heart-icon.png" alt="" />
         </div>
         <div className="w-[150px] absolute left-[70%] h-[50px] flex justify-around">
-          <p className="userName">{users.data.username}</p>
+          <p className="userName">{users?.data?.username}</p>
           <MdSystemUpdateAlt
             className="updateIcon"
             target="_blank"
@@ -72,6 +81,7 @@ export default function Main() {
           </ul>
         </div>
       </div>
+
       <section className="mainContainer">
         <div className="card">
           <div className="cardInside">
@@ -106,7 +116,7 @@ export default function Main() {
                 );
               })}
             </div>
-            <button type="submit" className="buttonNext">
+            <button type="button" className="buttonNext" onClick={handle}>
               Next
             </button>
           </div>

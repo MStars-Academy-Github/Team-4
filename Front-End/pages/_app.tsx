@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import "../styles/login.css";
 import "../styles/main.css";
+import "../styles/filtUser.css";
 import { useState } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Login from "../components/Login";
