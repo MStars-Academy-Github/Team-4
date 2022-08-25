@@ -11,6 +11,13 @@ const getUsers = (req: Request, res: Response, next: NextFunction) => {
     });
   });
 };
+const getRandomUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  Users.aggregate([{ $sample: { size: 1 } }]);
+};
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   const {
     firstName,
@@ -175,6 +182,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       success: true,
       message: "Амжилттай нэвтэрлээ",
+      data: userChecker,
     });
   } else {
     res.json({
