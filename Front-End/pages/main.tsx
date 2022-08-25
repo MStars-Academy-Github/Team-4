@@ -1,40 +1,48 @@
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaPhoneSquareAlt } from "react-icons/fa";
+import { GrTwitter } from "react-icons/gr";
+import { AiOutlineInstagram } from "react-icons/ai";
+import { FiMail } from "react-icons/fi";
 export default function Main() {
   return (
-    <div className="banner">
-      <div className="header w-full h-[70px] flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
+    <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
+      <div className="color"></div>
+      <div className="color"></div>
+      <div className="color"></div>
+      <div className="header flex justify-between">
         <div className="icons">
-          <h3 className="iconTag">Full Match</h3>
+          <h3 className="iconTag">Find Your Love</h3>
           <img className="heartIcon" src="./pictures/heart-icon.png" alt="" />
         </div>
-        <div className="navbars flex w-[450px] mt-5 justify-around">
-          <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
+        <div className="contactIconContainer justify-end">
+          <ul>
+            <li>
+              <a href="#">
+                <FaFacebookF className="contactIcon" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <GrTwitter className="contactIcon" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <AiOutlineInstagram className="contactIcon" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <FaPhoneSquareAlt className="contactIcon" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <FiMail className="contactIcon" />
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul>
-          <li>
-            <a href="#">
-              <FaFacebookF className="icons" />
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src="" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src="" alt="" />
-            </a>
-          </li>
-        </ul>
       </div>
-      <div className="imgs flex">
-        <img className="imgMen" src="./pictures/men.png" alt="" />
-        <img className="heart" src="./pictures/heart1.png" alt="" />
-        <img className="imgWomen" src="./pictures/women1.png" alt="" />
-      </div>
-    </div>
+    </section>
   );
 }
