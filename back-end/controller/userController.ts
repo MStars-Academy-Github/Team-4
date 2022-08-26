@@ -120,13 +120,17 @@ const sendRequest = async (req: Request, res: Response, next: NextFunction) => {
 };
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
-  const findUser = await Users.find({ username: body.username });
+  const findUser = await Users.find({ _id: body._id.toString() });
   console.log(findUser);
   console.log(findUser[0]._id.toString());
 
   if (findUser) {
     const myquery = { _id: findUser[0]._id.toString() };
-    const newvalues = { username: body.fixedname };
+    const newvalues = {
+      username: body.fixedname,
+      hobby: body.hobby,
+      imgUrl: body.imgUrl,
+    };
     await Users.updateOne({
       myquery,
       newvalues,
@@ -137,9 +141,13 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       before: {
         username: findUser[0].username,
+        hobby: findUser[0].username,
+        imgUrl: findUser[0].username,
       },
       after: {
         username: body.fixedname,
+        hobby: body.hobby,
+        imgUrl: body.imgUrl,
       },
     });
   } else {
