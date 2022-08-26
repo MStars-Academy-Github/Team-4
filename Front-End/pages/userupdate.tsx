@@ -25,7 +25,7 @@ export default function userupdate() {
         imgUrl: imgUrl,
         _id: _id,
       })
-      .then((res) => console.log(res.statusText));
+      .then((res) => console.log(res));
   };
   console.log(users?.data?._id);
 

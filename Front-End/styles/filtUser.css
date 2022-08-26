@@ -106,13 +106,19 @@
 .genderContainer {
   width: 400px;
   height: 50px;
+  margin-left: 15px;
 }
 .iamI p {
   font-size: 25px;
   font-weight: 500;
+  margin-left: 15px;
+}
+.iamI {
+  margin-left: 15px;
 }
 .iamI label {
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 .iamI input {
   margin-bottom: 5px;
@@ -121,9 +127,10 @@
   width: 400px;
   position: relative;
   margin-top: 15px;
+  margin-left: 25px;
 }
 .betweenAge label {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
 }
 .betweenAge select {
@@ -138,7 +145,8 @@
 }
 
 .and label {
-  font-size: 25px;
+  margin-left: 15px;
+  font-size: 20px;
   font-weight: 500;
 }
 .buttonBack {
