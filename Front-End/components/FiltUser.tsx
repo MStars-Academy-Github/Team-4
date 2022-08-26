@@ -12,6 +12,7 @@ export default function FiltUser() {
   const gender = (e: any) => {
     e.preventDefault();
     const gender = e.target.elements.genderCheck.value;
+    const age = e.target.elements.selectAge[1].value;
     console.log(gender);
   };
   return (
@@ -21,24 +22,24 @@ export default function FiltUser() {
         <p className="datingMn">dating.mn</p>
         <div className="dot"></div>
         <h3 className="attract">Хэн таныг хамгийн ихээр татаж байна вэ?</h3>
-        <div className="genderContainer flex justify-between">
-          <div className="gendersIcon flex">
-            <p>I am i : </p>
-            {users?.data?.gender === "male" ? (
-              <div className="genderIconRound">
-                <BsGenderMale />
+        <div className="formContainer">
+          <form action="" onSubmit={gender} className="seekingIcon">
+            <div className="genderContainer flex justify-around">
+              <div className="gendersIcon flex">
+                <p>I am i : </p>
+                {users?.data?.gender === "male" ? (
+                  <div className="genderIconRound">
+                    <BsGenderMale className="text-blue" />
+                  </div>
+                ) : (
+                  <div className="genderIconRound">
+                    <BsGenderFemale className="text-red" />
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="genderIconRound">
-                <BsGenderFemale />
-              </div>
-            )}
-          </div>
-          <div className="seeking flex">
-            <p>Seeking a : </p>
-            <div>
-              <form action="" onSubmit={gender} className="seekingIcon flex">
-                <div className="flex">
+              <div className="flex">
+                <div className="iamI flex">
+                  <p className="relative">Seeking a : </p>
                   <label htmlFor="checkboxMale">
                     <BsGenderMale className="iconMale" />
                   </label>
@@ -49,7 +50,7 @@ export default function FiltUser() {
                     id="checkboxMale"
                   />
                 </div>
-                <div className="flex">
+                <div className="seeking flex">
                   <label htmlFor="checkboxFemale">
                     <BsGenderFemale className="iconFemale" />
                   </label>
@@ -60,12 +61,44 @@ export default function FiltUser() {
                     id="checkboxFemale"
                   />
                 </div>
-                <button className="buttonSubmit absolute" type="submit">
-                  Next
-                </button>
-              </form>
+              </div>
             </div>
-          </div>
+            <div className="ageContainer justify-around flex">
+              <div className="betweenAge flex">
+                <label htmlFor="" className=" ">
+                  Between Ages :
+                </label>
+                <select name="selectAge" id="selectAge">
+                  <option value="18">18</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+              <div className="and flex">
+                <label htmlFor="">and</label>
+                <select name="selectAge" id="selectAge">
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+            </div>
+            <button className="buttonSubmit" type="submit">
+              Next
+            </button>
+            <button className="buttonBack" type="button">
+              Back
+            </button>
+          </form>
         </div>
       </div>
     </div>

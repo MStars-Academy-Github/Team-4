@@ -47,18 +47,24 @@
   font-size: 20px;
   text-align: center;
   position: relative;
-  top: -20%;
+  top: 10%;
 }
 .gendersIcon svg {
   width: 25px;
-  color: red;
+  color: blue;
   height: 25px;
   margin-left: 15px;
+  margin-top: 5px;
 }
-.genderContainer {
-  display: flex;
-  justify-content: space-between;
+.gendersIcon p {
+  position: relative;
+  left: 5%;
+}
+.formContainer {
   width: 400px;
+  height: 400px;
+  position: relative;
+  top: 25%;
 }
 .seekingIcon label svg {
   width: 25px;
@@ -69,18 +75,13 @@
   position: relative;
   top: 25%;
 }
-.seeking input {
-  display: flex;
-  position: relative;
-  top: 25%;
-}
-.seeking input label svg:nth-child(1) {
-  border: 5px solid black;
-}
 .seekingIcon .iconFemale {
   color: red;
   width: 25px;
   height: 25px;
+}
+.seeking {
+  margin-bottom: 5px;
 }
 .gendersIcon p {
   font-size: 25px;
@@ -97,7 +98,56 @@
   background-color: red;
   color: #fff;
   position: absolute;
-  top: 65%;
-  left: 15%;
+  top: 40%;
+  left: 5%;
+  text-align: center;
+}
+.genderContainer {
+  width: 400px;
+  height: 50px;
+}
+.iamI p {
+  font-size: 25px;
+  font-weight: 500;
+}
+.iamI label {
+  margin-bottom: 10px;
+}
+.iamI input {
+  margin-bottom: 5px;
+}
+.ageContainer {
+  width: 400px;
+  position: relative;
+  margin-top: 15px;
+}
+.betweenAge label {
+  font-size: 25px;
+  font-weight: 500;
+}
+.betweenAge select {
+  margin-left: 10px;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.and select {
+  margin-left: 10px;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.and label {
+  font-size: 25px;
+  font-weight: 500;
+}
+.buttonBack {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+  top: 55%;
+  left: 68%;
   text-align: center;
 }
