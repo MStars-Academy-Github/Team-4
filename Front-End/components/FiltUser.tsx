@@ -1,10 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
-
-export default function FiltUser() {
+type Props = {
+  temp: any;
+  getUser: any;
+};
+export default function FiltUser(props: Props) {
+  const [temp, setTemp] = useState<any>();
+  const [arr, setArr] = useState<any>([]);
   const [users, setUser1] = useState<any>([]);
   useEffect(() => {
+    setTemp(props.temp);
     if (localStorage.getItem("result")) {
       setUser1(JSON.parse(localStorage.getItem("result") || "[]"));
     }
@@ -12,9 +18,23 @@ export default function FiltUser() {
   const gender = (e: any) => {
     e.preventDefault();
     const gender = e.target.elements.genderCheck.value;
-    const age = e.target.elements.selectAge[1].value;
-    console.log(gender);
+    const age = e.target.elements.selectAge[0].value;
+    const age1 = e.target.elements.selectAge[1].value;
+
+    temp.map((p: any) => {
+      if (p?.age >= age && p?.age <= age1 && p?.gender == gender) {
+        setArr("[]");
+        // debugger;
+        arr.push(p);
+        // console.log(p);
+
+        setArr(arr);
+        props.getUser(arr);
+        return p;
+      }
+    });
   };
+
   return (
     <div className="card">
       <div className="filterCard">

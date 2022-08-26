@@ -9,5 +9,7 @@ router.post("/login", userController.loginUser);
 router.post("/filter", userController.getUsersByFilter);
 router.post("/req", userController.sendRequest);
 router.put("/update", userController.updateUser);
-
+router.post("/like", userController.liked);
+router.post("/match", userController.match);
+router.post("/dislike", userController.disliked);
 export default router;

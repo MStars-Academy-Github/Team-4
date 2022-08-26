@@ -227,6 +227,15 @@ const liked = async (req: Request, res: Response, next: NextFunction) => {
         },
       }
     );
+    res.json({
+      success: true,
+      message: "ymartai ch ajiljiin",
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "boldgue",
+    });
   }
 };
 const disliked = async (req: Request, res: Response, next: NextFunction) => {

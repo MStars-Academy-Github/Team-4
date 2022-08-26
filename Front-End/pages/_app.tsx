@@ -49,21 +49,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   // useEffect(() => {
-  //   const items = localStorage.getItem("result");
-
-  //   if (items) {
-  //     localStorage.setItem("result", ));
-  //     const testing = localStorage.getItem("result");
-  //     // console.log("testing");
-  //     console.log(testing);
-  //     setCheck(true);
-  //     // router.push("/main");
-  //   } else {
-  //     console.log("this is not working");
-  //   }
-  // }, [check]);
-  // console.log(users);
-  // useEffect(() => {
   //   document.addEventListener("mousemove", function (e) {
   //     let body = document.querySelector("body");
   //     let heart = document.createElement("span");

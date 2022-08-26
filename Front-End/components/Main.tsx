@@ -4,7 +4,7 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { MdSystemUpdateAlt } from "react-icons/md";
-import axios from "axios";
+import AllUser from "../components/AllUser";
 import { useRouter } from "next/router";
 import FiltUser from "./FiltUser";
 // import Modal from "./Modal";
@@ -17,6 +17,9 @@ export default function Main() {
   const [temp, setTemp] = useState<any>();
   const [one, setOne] = useState<any>();
   const router = useRouter();
+  const getUser = (e: any) => {
+    setTemp(e);
+  };
   useEffect(() => {
     fetch("http://localhost:3001/users")
       .then((res) => res.json())
@@ -49,7 +52,9 @@ export default function Main() {
       }
     });
     setTemp(filtering);
+
     // setUser(a);
+    console.log(filtering);
   };
   const tabIndex = -1;
   return (
@@ -184,44 +189,11 @@ export default function Main() {
             </div>
           </div>
         ) : (
-          <FiltUser />
+          <FiltUser temp={temp} getUser={getUser} />
         )}
         <div className="allUsers">
           {(check ? user : temp)?.map((e: any) => {
-            return (
-              e && (
-                <div
-                  className={one == e ? "w-[300px]" : "usersCard "}
-                  onClick={() => {
-                    console.log("test");
-                    console.log(one);
-
-                    open(e);
-                  }}
-                >
-                  <img src={e.imgUrl} className="userImg" alt="" />
-                  <p className="usersName text-center relative top-[55px]">
-                    {e.firstName}
-                  </p>
-                  <div className="information flex">
-                    <div className="ageCont flex flex-col">
-                      <p className="age">{e.age}</p>
-                      <p className="ageText relative top-[5px] left-[30px]">
-                        Age
-                      </p>
-                    </div>
-                    <div className="hobby flex flex-col">
-                      <p className="age relative top-[-22px] left-[80px]">
-                        {e.hobby}
-                      </p>
-                      <p className="ageText relative top-[-25px] left-[80px]">
-                        Interest
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )
-            );
+            return e && <AllUser e={e} />;
           })}
         </div>
       </section>
