@@ -7,6 +7,7 @@ import { MdSystemUpdateAlt } from "react-icons/md";
 import AllUser from "../components/AllUser";
 import { useRouter } from "next/router";
 import FiltUser from "./FiltUser";
+// import Modal from "./Modal";
 export default function Main() {
   const [comp, setComp] = useState<boolean>(true);
   const [hobby, setHobbys] = useState<string>("");
@@ -14,6 +15,7 @@ export default function Main() {
   const [user, setUser] = useState<any>();
   const [check, setCheck] = useState<boolean>(true);
   const [temp, setTemp] = useState<any>();
+  const [one, setOne] = useState<any>();
   const router = useRouter();
   const getUser = (e: any) => {
     setTemp(e);
@@ -36,6 +38,9 @@ export default function Main() {
     }
   }, []);
   // console.log(hobby);
+  function open(e: any) {
+    setOne(e);
+  }
   const handle = (e: any) => {
     setCheck(false);
     setComp(false);
@@ -62,6 +67,7 @@ export default function Main() {
           <h3 className="iconTag">Find Your Love</h3>
           <img className="heartIcon" src="./pictures/heart-icon.png" alt="" />
         </div>
+
         <div className="  pl-[45%] h-[50px] flex justify-around">
           <div className="dropdown">
             <button
@@ -187,10 +193,9 @@ export default function Main() {
         )}
         <div className="allUsers">
           {(check ? user : temp)?.map((e: any) => {
-            return e && <div></div>;
+            return e && <AllUser e={e} />;
           })}
         </div>
-        <AllUser />
       </section>
     </section>
   );
