@@ -17,10 +17,15 @@ type Result = {
   message: string;
   success: boolean;
 };
-export default function Login() {
+type Prop = {
+  checker: (e: boolean) => {};
+};
+export default function Login(props: Prop) {
   const [result, setResult] = useState<Result>();
 
   const router = useRouter();
+  // console.log(result);
+
   const login = (e: any) => {
     e.preventDefault();
     const username = e.target[0].value;
@@ -32,17 +37,23 @@ export default function Login() {
         password: password,
       })
       .then((res) => {
+        // console.log(res);
+
         setResult(res.data);
       })
       .catch((error) => console.error(error));
   };
-  console.log(result);
-
   useEffect(() => {
-    if (result !== undefined && result.message) {
+    if (result !== undefined && result.success) {
       localStorage.setItem("result", JSON.stringify(result));
+
+      // console.log("testing");
+
+      router.push("/main");
     }
   }, [result]);
+  // console.log(result);
+
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
       <div className="color"></div>

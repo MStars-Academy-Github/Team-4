@@ -4,22 +4,33 @@ import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 
 export default function register() {
   const [change, setChange] = useState<any>([]);
+
   const data = ["serious", "pen pal", "romantic", "flirty", "nothing"];
-  console.log(change);
+
+  function doubleChecker(e: string) {
+    if (change.includes(e)) {
+      change.splice(change.indexOf(e), 1);
+      setChange(change);
+    } else {
+      setChange([...change, e]);
+    }
+  }
 
   const Name = (e: any) => {
     e.preventDefault();
 
-    const firstName = e.target[0].value;
-    const lastName = e.target[1].value;
-    const age = e.target[4].value;
-    const gender = e.target[2].value == "on" ? "male" : "female";
+    const username = e.target[0].value;
+    const firstName = e.target[0 + 1].value;
+    const lastName = e.target[1 + 1].value;
+    const age = e.target[4 + 1].value;
+    const gender = e.target[2 + 1].value == "on" ? "male" : "female";
     const hobby = change.toString();
-    const imgUrl = e.target[5].value;
-    const password = e.target[6].value;
+    const imgUrl = e.target[5 + 1].value;
+    const password = e.target[6 + 1].value;
 
     axios
       .post("http://localhost:3001/users", {
+        username: username,
         firstName: firstName,
         lastName: lastName,
         imgUrl: imgUrl,
@@ -33,7 +44,6 @@ export default function register() {
   };
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
-      <pre>{change}</pre>
       <div className="color"></div>
       <div className="color"></div>
       <div className="color"></div>
@@ -47,6 +57,9 @@ export default function register() {
           <div className="loginForm relative w-full h-full p-[40px]">
             <h2>Register Form</h2>
             <form action="" onSubmit={Name}>
+              <div className="inputBoxRegister">
+                <input type="text" placeholder="username" name="username" />
+              </div>
               <div className="inputBoxRegister">
                 <input type="text" placeholder="first name" name="firstname" />
               </div>
@@ -81,16 +94,25 @@ export default function register() {
                 {data.map((e, i) => {
                   return (
                     <div key={i}>
-                      <input
-                        type="checkbox"
-                        name="interest"
-                        id="interest"
-                        onChange={() => {
-                          setChange([...change, e]);
-                        }}
+                      {/* <input
+                        // className="w-[100px] bg-black text-slate-300"
+                        
                       />
 
-                      <label htmlFor="interest">{e}</label>
+                      <label htmlFor="interest"></label> */}
+                      <button
+                        type="button"
+                        className={change.includes(e) ? "checked" : ""}
+                        name="interest"
+                        id="interest"
+                        onClick={() => {
+                          // console.log("working");
+
+                          doubleChecker(e);
+                        }}
+                      >
+                        {e}
+                      </button>
                     </div>
                   );
                 })}

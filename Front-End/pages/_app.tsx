@@ -5,19 +5,53 @@ import "../styles/filtUser.css";
 import { useState } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Login from "../components/Login";
-
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import type { AppProps } from "next/app";
+type Result = {
+  data: {
+    _id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    imgUrl: string;
+    password: string;
+    gender: string;
+    age: number;
+    __v: number;
+  };
+  message: string;
+  success: boolean;
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [users, setUser1] = useState<any>();
+  // const [users, setUser1] = useState<any>();
+  const [result, setResult] = useState<Result>();
+  const [check, setCheck] = useState<boolean>(false);
+  const [checking, setChecking] = useState<boolean>(false);
+  const router = useRouter();
+  let checkerBoolean;
+  function checker(e: boolean) {
+    // console.log(e);
+    setCheck(e);
+    return e;
+  }
+  console.log(check);
+
   useEffect(() => {
-    if (localStorage.getItem("result")) {
-      setUser1(JSON.parse(localStorage.getItem("result") || "result"));
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("result", JSON.stringify(result));
+      const testing = localStorage.getItem("result");
+      // console.log("testing");
+      console.log(testing);
+      setCheck(true);
+      // router.push("/main");
+    } else {
+      console.log("this is not working");
     }
-  }, []);
-  console.log(users);
+  }, [check]);
+  // console.log(users);
   // useEffect(() => {
   //   document.addEventListener("mousemove", function (e) {
   //     let body = document.querySelector("body");
@@ -41,7 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   //     }, 1000);
   //   });
   // }, []);
-  return users ? <Component {...pageProps} /> : <Login />;
+  return check ? <Component {...pageProps} /> : <Login checker={checker} />;
 }
 
 export default MyApp;
