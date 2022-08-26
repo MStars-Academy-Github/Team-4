@@ -1,5 +1,5 @@
 .card {
-  width: 500px;
+  width: 700px;
   height: 600px;
   background: #fff;
   border-radius: 40px;
@@ -34,7 +34,7 @@
   border-radius: 50%;
   position: absolute;
   top: 74px;
-  left: 225px;
+  left: 187px;
 }
 .filterCard img {
   width: 50px;
