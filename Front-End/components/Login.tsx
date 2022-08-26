@@ -8,15 +8,17 @@ export default function Login() {
   const router = useRouter();
   const login = (e: any) => {
     e.preventDefault();
-    const firstName = e.target[0].value;
+    const username = e.target[0].value;
     const password = e.target[1].value;
 
     axios
       .post("http://localhost:3001/users/login", {
-        firstName: firstName,
+        username: username,
         password: password,
       })
       .then((res) => {
+        console.log(res);
+
         setResult(res.data);
       })
       .catch((error) => console.error(error));
