@@ -21,14 +21,12 @@ export default function Main() {
       setUser1(JSON.parse(localStorage.getItem("result") || "[]"));
     }
   }, []);
-  console.log(hobby);
   const handle = (e: any) => {
     const a = user
       .filter((u: any) => u.hobby == hobby)
       .map((b: any) => {
         return b;
       });
-    console.log(a);
     setUsers(a);
   };
 

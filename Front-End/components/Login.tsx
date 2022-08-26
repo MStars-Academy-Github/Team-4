@@ -36,7 +36,6 @@ export default function Login() {
       })
       .catch((error) => console.error(error));
   };
-  console.log(result);
 
   useEffect(() => {
     if (result !== undefined && result.message) {

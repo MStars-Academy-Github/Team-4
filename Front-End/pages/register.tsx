@@ -5,7 +5,6 @@ import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 export default function register() {
   const [change, setChange] = useState<any>([]);
   const data = ["serious", "pen pal", "romantic", "flirty", "nothing"];
-  console.log(change);
 
   const Name = (e: any) => {
     e.preventDefault();
@@ -33,7 +32,6 @@ export default function register() {
   };
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
-      <pre>{change}</pre>
       <div className="color"></div>
       <div className="color"></div>
       <div className="color"></div>

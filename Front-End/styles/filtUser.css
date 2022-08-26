@@ -40,14 +40,15 @@
   width: 50px;
   position: absolute;
   top: 5%;
-  left: 47%;
+  left: 45%;
   transform: rotate(45deg);
 }
 .filterCard .attract {
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: 600;
   text-align: center;
   position: relative;
-  top: 10%;
+  top: 15%;
 }
 .gendersIcon svg {
   width: 25px;

@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import "../styles/login.css";
 import "../styles/main.css";
 import "../styles/filtUser.css";
+import "../styles/userUpdate.css";
 import { useState } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Login from "../components/Login";
@@ -17,7 +18,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       setUser1(JSON.parse(localStorage.getItem("result") || "result"));
     }
   }, []);
-  console.log(users);
   // useEffect(() => {
   //   document.addEventListener("mousemove", function (e) {
   //     let body = document.querySelector("body");
