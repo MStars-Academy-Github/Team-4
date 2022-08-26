@@ -7,6 +7,7 @@ import { MdSystemUpdateAlt } from "react-icons/md";
 import axios from "axios";
 import { useRouter } from "next/router";
 import FiltUser from "./FiltUser";
+// import Modal from "./Modal";
 export default function Main() {
   const [comp, setComp] = useState<boolean>(true);
   const [hobby, setHobbys] = useState<string>("");
@@ -14,6 +15,7 @@ export default function Main() {
   const [user, setUser] = useState<any>();
   const [check, setCheck] = useState<boolean>(true);
   const [temp, setTemp] = useState<any>();
+  const [one, setOne] = useState<any>();
   const router = useRouter();
   useEffect(() => {
     fetch("http://localhost:3001/users")
@@ -33,6 +35,9 @@ export default function Main() {
     }
   }, []);
   // console.log(hobby);
+  function open(e: any) {
+    setOne(e);
+  }
   const handle = (e: any) => {
     setCheck(false);
     setComp(false);
@@ -57,6 +62,7 @@ export default function Main() {
           <h3 className="iconTag">Find Your Love</h3>
           <img className="heartIcon" src="./pictures/heart-icon.png" alt="" />
         </div>
+
         <div className="  pl-[45%] h-[50px] flex justify-around">
           <div className="dropdown">
             <button
@@ -184,7 +190,15 @@ export default function Main() {
           {(check ? user : temp)?.map((e: any) => {
             return (
               e && (
-                <div className="usersCard">
+                <div
+                  className={one == e ? "w-[300px]" : "usersCard "}
+                  onClick={() => {
+                    console.log("test");
+                    console.log(one);
+
+                    open(e);
+                  }}
+                >
                   <img src={e.imgUrl} className="userImg" alt="" />
                   <p className="usersName text-center relative top-[55px]">
                     {e.firstName}
