@@ -37,7 +37,7 @@ export default function FiltUser() {
                   </div>
                 )}
               </div>
-              <div className="flex">
+              <div className="genderCont flex">
                 <div className="iamI flex">
                   <p className="relative">Seeking a : </p>
                   <label htmlFor="checkboxMale">
