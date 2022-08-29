@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
 
 export default function register() {
+<<<<<<< HEAD
   const [change, setChange] = useState<string[]>([]);
   const [classType, setClassType] = useState<boolean>();
 
@@ -15,6 +16,20 @@ export default function register() {
     // setClassType(!classType);
     const value = change.includes(e);
     console.log(value);
+=======
+  const [change, setChange] = useState<any>([]);
+
+  const data = ["serious", "pen pal", "romantic", "flirty", "nothing"];
+
+  function doubleChecker(e: string) {
+    if (change.includes(e)) {
+      change.splice(change.indexOf(e), 1);
+      setChange(change);
+    } else {
+      setChange([...change, e]);
+    }
+  }
+>>>>>>> eebee103bbdcb4a52c58ffabaa3fa2113ca1410a
 
     if (value) {
       const index = change.indexOf(e);
@@ -37,6 +52,7 @@ export default function register() {
     const hobby = change.toString();
     const imgUrl = e.target[5 + 1].value;
     const password = e.target[6 + 1].value;
+<<<<<<< HEAD
     const data = [
       username,
       firstName,
@@ -48,6 +64,8 @@ export default function register() {
       password,
     ];
     console.log(data);
+=======
+>>>>>>> eebee103bbdcb4a52c58ffabaa3fa2113ca1410a
 
     axios
       .post("http://localhost:3001/users", {
@@ -115,6 +133,7 @@ export default function register() {
                 {data.map((e, i) => {
                   return (
                     <div key={i}>
+<<<<<<< HEAD
                       <button
                         className={
                           change.includes(e) ? "checked " : "text-[#7c7878] "
@@ -123,6 +142,22 @@ export default function register() {
                         name={e}
                         id="interest"
                         onClick={async () => {
+=======
+                      {/* <input
+                        // className="w-[100px] bg-black text-slate-300"
+                        
+                      />
+
+                      <label htmlFor="interest"></label> */}
+                      <button
+                        type="button"
+                        className={change.includes(e) ? "checked" : ""}
+                        name="interest"
+                        id="interest"
+                        onClick={() => {
+                          // console.log("working");
+
+>>>>>>> eebee103bbdcb4a52c58ffabaa3fa2113ca1410a
                           doubleChecker(e);
                         }}
                       >

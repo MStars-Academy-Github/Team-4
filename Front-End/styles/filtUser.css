@@ -1,0 +1,162 @@
+.card {
+  width: 700px;
+  height: 600px;
+  background: #fff;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 5%);
+  backdrop-filter: blur(16px);
+  margin-right: 10px;
+}
+.filterCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 450px;
+}
+.filterCard .datingMn {
+  font-family: DynaPuff;
+  position: absolute;
+  top: 11%;
+  left: 36%;
+  font-size: 25px;
+}
+.filterCard .dot {
+  width: 5px;
+  background: red;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 74px;
+  left: 187px;
+}
+.filterCard img {
+  width: 50px;
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  transform: rotate(45deg);
+}
+.filterCard .attract {
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  top: 15%;
+}
+.gendersIcon svg {
+  width: 25px;
+  color: blue;
+  height: 25px;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+.gendersIcon p {
+  position: relative;
+  left: 5%;
+}
+.formContainer {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  top: 25%;
+}
+.seekingIcon label svg {
+  width: 25px;
+  height: 25px;
+  color: blue;
+  margin-right: 5px;
+  margin-left: 5px;
+  position: relative;
+  top: 25%;
+}
+.seekingIcon .iconFemale {
+  color: red;
+  width: 25px;
+  height: 25px;
+}
+.seeking {
+  margin-bottom: 5px;
+}
+.gendersIcon p {
+  font-size: 25px;
+  font-weight: 500;
+}
+.seeking p {
+  font-size: 25px;
+  font-weight: 500;
+}
+.buttonSubmit {
+  width: 350px;
+  height: 40px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: red;
+  color: #fff;
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  text-align: center;
+}
+.genderContainer {
+  width: 400px;
+  height: 50px;
+  margin-left: 15px;
+}
+.iamI p {
+  font-size: 25px;
+  font-weight: 500;
+  margin-left: 15px;
+}
+.iamI {
+  margin-left: 15px;
+}
+.iamI label {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.iamI input {
+  margin-bottom: 5px;
+}
+.ageContainer {
+  width: 400px;
+  position: relative;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+.betweenAge label {
+  font-size: 20px;
+  font-weight: 500;
+}
+.betweenAge select {
+  margin-left: 10px;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.and select {
+  margin-left: 10px;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.and label {
+  margin-left: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.buttonBack {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+  top: 55%;
+  left: 68%;
+  text-align: center;
+}

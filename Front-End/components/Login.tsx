@@ -2,10 +2,30 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function Login() {
-  const [result, setResult] = useState();
+type Result = {
+  data: {
+    _id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    imgUrl: string;
+    password: string;
+    gender: string;
+    age: number;
+    __v: number;
+  };
+  message: string;
+  success: boolean;
+};
+type Prop = {
+  checker: (e: boolean) => {};
+};
+export default function Login(props: Prop) {
+  const [result, setResult] = useState<Result>();
 
   const router = useRouter();
+  // console.log(result);
+
   const login = (e: any) => {
     e.preventDefault();
     const username = e.target[0].value;
@@ -17,16 +37,23 @@ export default function Login() {
         password: password,
       })
       .then((res) => {
+        // console.log(res);
+
         setResult(res.data);
       })
       .catch((error) => console.error(error));
   };
-
   useEffect(() => {
-    if (result !== undefined) {
+    if (result !== undefined && result.success) {
       localStorage.setItem("result", JSON.stringify(result));
+
+      // console.log("testing");
+
+      router.push("/main");
     }
   }, [result]);
+  // console.log(result);
+
   return (
     <section className="login w-full h-full flex absolute bg-gradient-to-t from-pink-200 to-pink-500">
       <div className="color"></div>
@@ -48,11 +75,10 @@ export default function Login() {
               <div className="inputBox">
                 <input type="password" placeholder="Password" name="password" />
               </div>
-              <p className="result text-[#fff]">aaa</p>
+              <p className="result text-[#fff]">{result?.message}</p>
               <a className="registerButton" href="/register">
                 Бүртгүүлэх
               </a>
-
               <div className="inputBox">
                 <button type="submit">Login</button>
               </div>

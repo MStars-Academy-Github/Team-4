@@ -120,13 +120,17 @@ const sendRequest = async (req: Request, res: Response, next: NextFunction) => {
 };
 const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
-  const findUser = await Users.find({ username: body.username });
+  const findUser = await Users.find({ _id: body._id.toString() });
   console.log(findUser);
   console.log(findUser[0]._id.toString());
 
   if (findUser) {
     const myquery = { _id: findUser[0]._id.toString() };
-    const newvalues = { username: body.fixedname };
+    const newvalues = {
+      username: body.fixedname,
+      hobby: body.hobby,
+      imgUrl: body.imgUrl,
+    };
     await Users.updateOne({
       myquery,
       newvalues,
@@ -137,9 +141,13 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       before: {
         username: findUser[0].username,
+        hobby: findUser[0].username,
+        imgUrl: findUser[0].username,
       },
       after: {
         username: body.fixedname,
+        hobby: body.hobby,
+        imgUrl: body.imgUrl,
       },
     });
   } else {
@@ -191,6 +199,90 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     });
   }
 };
+const liked = async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  // user who liked
+  const user = await Users.findOne({
+    _id: body.firstId,
+  });
+  // liked user by first user
+  const second = await Users.findOne({
+    _id: body.secondId,
+  });
+
+  if (user && second) {
+    await Users.updateOne(
+      { _id: body.firstId },
+      {
+        $set: {
+          liked: body.secondId,
+        },
+      }
+    );
+    await Users.updateOne(
+      { _id: body.secondId },
+      {
+        $set: {
+          people_liked: body.firstId,
+        },
+      }
+    );
+    res.json({
+      success: true,
+      message: "ymartai ch ajiljiin",
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "boldgue",
+    });
+  }
+};
+const disliked = async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  // user who disliked
+  const user = await Users.findOne({
+    _id: body.firstId,
+  });
+  // first user's disliked users
+  const second = await Users.findOne({
+    _id: body.secondId,
+  });
+
+  if (user && second) {
+    await Users.updateOne(
+      { _id: body.firstId },
+      {
+        $set: {
+          liked: body.secondId,
+        },
+      }
+    );
+  }
+};
+const match = async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+
+  const user = await Users.findOne({
+    _id: body._id,
+  });
+  const total: any = [];
+  Users.find({}, (err: Error, data: any) => {
+    if (err) {
+      return err;
+    } else {
+      data.data.forEach((element: any) => {
+        if (element.liked.includes(body._id)) {
+          total.push(element);
+        }
+      });
+      res.json({
+        success: true,
+        data: total,
+      });
+    }
+  });
+};
 
 export default {
   getUsers,
@@ -200,4 +292,7 @@ export default {
   getUsersByFilter,
   sendRequest,
   updateUser,
+  liked,
+  disliked,
+  match,
 };
