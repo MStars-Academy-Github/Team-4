@@ -1,6 +1,7 @@
 import Users from "../model/users";
 import express, { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
+import { isObjectIdOrHexString } from "mongoose";
 const getUsers = (req: Request, res: Response, next: NextFunction) => {
   Users.find({}, (err: Error, data: any) => {
     if (err) {
@@ -127,9 +128,9 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   if (findUser) {
     const myquery = { _id: findUser[0]._id.toString() };
     const newvalues = {
-      username: body.fixedname,
+      $set :{ username: body.fixedname,
       hobby: body.hobby,
-      imgUrl: body.imgUrl,
+      imgUrl: body.imgUrl,}
     };
     await Users.updateOne({
       myquery,
@@ -161,9 +162,9 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   console.log(body);
 
-  const findUser = await Users.findOne({ _id: body._id });
+  const findUser = await Users.findOne({ _id: `ObjectId( ${body._id})` });
   if (findUser) {
-    await Users.deleteOne({ _id: body._id });
+    await Users.deleteOne({ _id: `ObjectId( ${body._id})` });
     res.json({
       success: true,
       message: "user deleted succesfully",
@@ -209,21 +210,28 @@ const liked = async (req: Request, res: Response, next: NextFunction) => {
   const second = await Users.findOne({
     _id: body.secondId,
   });
-
+  const dummy : any = user
+  const secondUser: any = second
+  const test = dummy._id
+  console.log(body.firstId);
+  
+  
+  const ObjectId = (e : string)=>  `ObjectId(${e})`
   if (user && second) {
     await Users.updateOne(
-      { _id: body.firstId },
+      { _id: { $regex: `/${body.firstId}/` } }
+,
       {
-        $set: {
+        $push: {
           liked: body.secondId,
         },
       }
     );
     await Users.updateOne(
-      { _id: body.secondId },
+      { _id: { $regex: `/${body.secondId}/` }},
       {
-        $set: {
-          people_liked: body.firstId,
+        $push: {
+          people_liked: body.firstId
         },
       }
     );
@@ -242,19 +250,19 @@ const disliked = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   // user who disliked
   const user = await Users.findOne({
-    _id: body.firstId,
+    _id: `ObjectId( ${body.firstId})`,
   });
   // first user's disliked users
   const second = await Users.findOne({
-    _id: body.secondId,
+    _id: `ObjectId( ${body.secondId})`,
   });
 
   if (user && second) {
     await Users.updateOne(
-      { _id: body.firstId },
+      { _id: `ObjectId( ${body.firstId})` },
       {
         $set: {
-          liked: body.secondId,
+          disliked: `ObjectId( ${body.secondId})`
         },
       }
     );

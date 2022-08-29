@@ -41,8 +41,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   console.log(check);
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("result") || "[]");
-    if (items) {
+    // const items = JSON.parse(localStorage.getItem("result") || "[]");
+    if (JSON.parse(localStorage.getItem("result") || '')) {
       setItems(items);
       setCheck(true);
     }

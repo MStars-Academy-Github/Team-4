@@ -25,6 +25,8 @@ export default function modal({ e }: Props) {
     const _id = e._id;
     const self_id = result.data._id;
     console.log(self_id);
+    console.log(_id);
+
 
     axios
       .post("http://localhost:3001/users/like", {
