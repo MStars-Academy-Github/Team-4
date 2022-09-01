@@ -10,6 +10,8 @@ export function createUser(body: any) {
     return false;
   }
 }
-
+export function updateUser(body: any) {
+  User.updateOne({ email: body.email }, { body });
+}
 export const getUserByEmail = async (email: string): Promise<IUserDoc | null> =>
   User.findOne({ email: email });
