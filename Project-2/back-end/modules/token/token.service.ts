@@ -1,10 +1,13 @@
-import { IUser, IUserDoc } from "../user/user.interface";
+import { IUserDoc } from "../user/user.interface";
 import jwt from "jsonwebtoken";
 const TOKEN_KEY = process.env.TOKEN_KEY || "token";
-export const generateAuthToken = async (user: IUserDoc): Promise<string> => {
+
+export const generateAuthToken = async (
+  user: IUserDoc | null
+): Promise<string> => {
   const payload = {
-    email: user.email,
-    firstname: user.firstname,
+    email: user?.email,
+    firstName: user?.firstName,
   };
 
   return jwt.sign(payload, TOKEN_KEY, {

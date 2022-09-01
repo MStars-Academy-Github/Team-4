@@ -1,12 +1,12 @@
 import mongoose, { Model, Document } from "mongoose";
 
 export interface IUser {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: number;
   password: string;
-  registerID: string;
+  register: string;
 }
 
 export interface IUserDoc extends IUser, Document {
