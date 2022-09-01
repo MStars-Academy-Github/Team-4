@@ -17,7 +17,10 @@ export default function Register({ setComp }: RegisterProps) {
         data,
       })
       .then((res) => {
-        console.log(res);
+        
+	if(res.data.success){
+	setComp(true)}else{
+	console.error(res.data.message)}
       })
       .catch((err) => {
         console.error(err);

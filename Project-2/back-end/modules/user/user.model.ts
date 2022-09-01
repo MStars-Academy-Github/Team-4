@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 import { IUserDoc, IUser } from "./user.interface";
 import bcrypt from "bcryptjs";
 const userSchema = new Schema<IUserDoc>({
-  firstname: { type: String, required: true, trim: true },
-  lastname: { type: String, trim: true },
+  firstName: { type: String, required: true, trim: true },
+  lastName: { type: String, trim: true },
   email: { type: String, required: true, trim: true, unique: true },
   phone: { type: Number, required: true },
   password: {
@@ -11,7 +11,7 @@ const userSchema = new Schema<IUserDoc>({
     required: true,
     minlength: 8,
   },
-  registerID: {
+  register: {
     type: String,
     trim: true,
     minlength: 10,

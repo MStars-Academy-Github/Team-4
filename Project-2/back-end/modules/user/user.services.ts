@@ -3,7 +3,12 @@ import { IUserDoc } from "./user.interface";
 import User from "./user.model";
 
 export function createUser(body: any) {
-  return User.create(body);
+  if (getUserByEmail(body.email) == null) {
+    return User.create(body);
+  } else {
+    // console.log("user existing");
+    return false;
+  }
 }
 
 export const getUserByEmail = async (email: string): Promise<IUserDoc | null> =>
