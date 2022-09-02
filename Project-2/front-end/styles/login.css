@@ -1,0 +1,46 @@
+.mainContainer {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  margin: 0;
+  top: 0;
+  position: absolute;
+}
+.loginForm {
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.searchForm input {
+  width: 550px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 5px 0px 0px 5px;
+}
+.searchForm button {
+  border: 1px solid grey;
+  height: 40px;
+  width: 40px;
+  border-radius: 0px 5px 5px 0px;
+}
+.headerButtons {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  background: #fff;
+  border-top: grey;
+  border-top-style: solid;
+}
+.headerButtons button {
+  margin-top: 10px;
+  border: 1px solid grey;
+  width: 80px;
+  height: 30px;
+  border-radius: 20px 20px 20px 20px;
+  background: rgba(0, 0, 0, 0.05);
+}
