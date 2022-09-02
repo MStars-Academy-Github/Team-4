@@ -13,6 +13,7 @@ export interface HeaderProps {
   setChecker: Dispatch<SetStateAction<boolean | undefined>>;
 }
 export interface IUser {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;

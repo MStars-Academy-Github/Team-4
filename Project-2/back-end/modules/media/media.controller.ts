@@ -11,15 +11,20 @@ mongoose.connection.on("connected", () => {
 });
 export async function createMedia(req: Request, res: Response) {
   const form = new formidable.IncomingForm();
+  console.log("testing");
+
   form.parse(req, async (err: Error, fields: Fields, files: any) => {
+    console.log("test");
+
     if (err) {
       console.error(err);
     }
-    const user = await User.findById("630ec5e99f7776ef3be38a8f");
+    const user = await User.findById(fields.postedBy);
     let media = new Media(fields);
     media.postedBy = user?._id;
     const file = files["media"];
-    console.log(fields);
+    console.log(user);
+
     if (file) {
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
         contentType: "binary/octet-stream",
