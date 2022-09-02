@@ -24,27 +24,37 @@ export default function Login({ setChecker }: LoginProps) {
       });
   }
   return comp ? (
-    <div className="flex justify-center m-auto ">
+    <div className="loginContainer m-auto ">
+      <img
+        src="./pictures/Chitube.png"
+        className="loginLogo w-[250px] h-[200px]"
+        alt=""
+      />
       <form
         action="submit"
-        className="flex-col flex bg-white w-[300px] p-4 text-white"
+        className="loginForm flex-col flex bg-white w-[300px] p-4 text-white"
         onSubmit={(e) => {
           submitHandler(e);
         }}
       >
-        <input type="text" name="email" placeholder="email" className="mb-2" />
+        <input
+          type="text"
+          name="email"
+          placeholder="email"
+          className="mb-2 cursor-text"
+        />
         <input
           type="password"
           name="password"
           placeholder="password"
-          className="mb-2"
+          className="mb-2 cursor-text"
         />
         <div className="flex justify-between">
-          <button className="text-black">LOGIN</button>
+          <button className="text-black cursor-pointer">LOGIN</button>
           <input
             type="button"
             value="REGISTER"
-            className="text-black "
+            className=" text-red-900 cursor-pointer"
             onClick={() => {
               setComp(false);
             }}
