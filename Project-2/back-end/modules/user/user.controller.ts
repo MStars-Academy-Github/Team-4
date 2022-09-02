@@ -5,8 +5,10 @@ export const createUser = async (req: Request, res: Response) => {
   if (user) {
     res.send({ user, success: true });
   } else {
-    
-
-    res.send({ success: false  , message : "user with this email existing"});
+    res.send({ success: false, message: "user with this email existing" });
   }
+};
+export const updateUser = async (req: Request, res: Response) => {
+  const data = await userService.updateUser(req.body.data);
+  res.send(data);
 };
