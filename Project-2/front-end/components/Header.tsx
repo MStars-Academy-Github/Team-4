@@ -14,18 +14,21 @@ export default function Header({ setChecker }: HeaderProps) {
         MediaStream
       </h1>
       <div className="w-72 flex text-[15px] items-center">
-        <p className="w-full mr-1">ADD MEDIA</p>
-        <p
+        <input type="button" value="ADD MEDIA" className="w-full mr-1" />
+        {/* <p className="w-full mr-1">ADD MEDIA</p> */}
+        <input
+          type="button"
+          value="MY PROFILE"
           className="w-full mr-1"
           onClick={() => {
             router.push("/profile");
           }}
-        >
-          MY PROFILE
-        </p>
+        />
+
         <button
           type="button"
           onClick={() => {
+            router.push("/");
             setChecker(true);
             localStorage.clear();
           }}
