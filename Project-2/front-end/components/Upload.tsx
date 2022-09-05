@@ -61,28 +61,40 @@ export default function Upload() {
     }
   }
   return (
+    <div className="bg-gray-400 w-[40%] flex justify-center mx-auto">
+      <form
+        action="submit"
+        className="flex flex-col"
+        onSubmit={(e: any) => {
+          submithandler(e);
+        }}
+        encType="multipart/form-data"
+      >
+        <p>ADD YOUR VIDEO</p>
+        <input
+          accept="video/*"
+          type="file"
+          onChange={handleChange("video")}
+          id="icon-button-file"
+        />
+        <input type="text" name="title" id="title" placeholder="title" />
 
-
-          <input type="text" name="title" id="title" placeholder="Title" />
-
-          <select name="genre" id="genre">
-            <option value="none" selected disabled hidden>
-              Select a genre
-            </option>
-            {genre.map((e) => {
-              return <option value={e}>{e}</option>;
-            })}
-          </select>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            placeholder="description"
-          />
-          <input type="file" name="media" id="media" />
-          <button>submit</button>
-        </form>
-      </div>
+        <select name="genre" id="genre">
+          <option value="none" selected disabled hidden>
+            Select a genre
+          </option>
+          {genre.map((e) => {
+            return <option value={e}>{e}</option>;
+          })}
+        </select>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          placeholder="description"
+        />
+        <button>submit</button>
+      </form>
     </div>
   );
 }

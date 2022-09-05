@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { list } from "../pages/api/api.media";
 import { IVideos, PlayerProps } from "../types/types";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 export default function Player({ e, i }: PlayerProps) {
   const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
@@ -12,9 +12,7 @@ export default function Player({ e, i }: PlayerProps) {
   return (
     <div className="w-[20%] bg-slate-100 h-[250px]">
       <p>testing</p>
-      <ReactPlayer
-
-      />
+      <ReactPlayer e={e} i={i} />
     </div>
   );
 }
