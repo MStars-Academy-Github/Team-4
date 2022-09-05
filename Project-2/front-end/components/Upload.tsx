@@ -10,6 +10,7 @@ export default function Upload() {
     setUser(res);
   }, []);
 
+  const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
   async function submithandler(e: any) {
     e.preventDefault();
     const formData = new FormData();
@@ -38,32 +39,39 @@ export default function Upload() {
     }
   }
   return (
-    <div className="upload w-[100%] min-h-[800px] flex-col items-center flex justify-center mx-auto">
-      <img src="./pictures/Chitube.png" alt="" />
-      <form
-        action="submit"
-        className="flex flex-col justify-around border w-[450px] border-solid border-black"
-        onSubmit={(e: any) => {
-          submithandler(e);
-        }}
-        encType="multipart/form-data"
-      >
-        <p>ADD YOUR VIDEO</p>
+    <div className="upload w-[350px] min-h-[800px] justify-center items-center flex flex-col mx-auto">
+      <div className="uploads">
+        <form
+          action="submit"
+          className="flex flex-col justify-around"
+          onSubmit={(e: any) => {
+            submithandler(e);
+          }}
+          encType="multipart/form-data"
+        >
+          <img src="./pictures/Chitube.png" alt="" />
+          <p>ADD YOUR VIDEO</p>
 
-        <input type="text" name="title" id="title" placeholder="title" />
-        <select name="genre" id="genre">
-          <option value="animation">Animation</option>
-        </select>
-        {/* <input type="text" name="genre" id="genre" placeholder="genre" /> */}
-        <input
-          type="text"
-          name="description"
-          id="description"
-          placeholder="description"
-        />
-        <input type="file" name="media" id="media" />
-        <button className=" bg-red-500">submit</button>
-      </form>
+          <input type="text" name="title" id="title" placeholder="Title" />
+
+          <select name="genre" id="genre">
+            <option value="none" selected disabled hidden>
+              Select a genre
+            </option>
+            {genre.map((e) => {
+              return <option value={e}>{e}</option>;
+            })}
+          </select>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="description"
+          />
+          <input type="file" name="media" id="media" />
+          <button>submit</button>
+        </form>
+      </div>
     </div>
   );
 }

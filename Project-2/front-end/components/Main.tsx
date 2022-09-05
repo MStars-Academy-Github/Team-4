@@ -16,9 +16,11 @@ import MainHeader from "./mainHeader";
 import LeftSide from "./LeftSide";
 import axios from "axios";
 import Player from "./Player";
+import dynamic from "next/dynamic";
 
 export default function Main({ setChecker }: MainProps) {
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
+  const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
   useEffect(() => {
     axios
       .get("http://localhost:4000/v1/media/videos")
