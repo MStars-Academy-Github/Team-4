@@ -4,6 +4,9 @@ import { Types } from "mongoose";
 import { User } from "../user";
 
 const mediaSchema = new Schema<IMediaDoc>({
+  media: {
+    type: String,
+  },
   title: {
     type: String,
     required: true,

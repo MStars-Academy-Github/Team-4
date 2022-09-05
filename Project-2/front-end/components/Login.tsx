@@ -24,7 +24,7 @@ export default function Login({ setChecker }: LoginProps) {
       });
   }
   return comp ? (
-    <div className="loginContainer m-auto ">
+    <div className="loginContainer m-auto flex flex-col absolute top-[20%] left-[35%]">
       <img
         src="./pictures/Chitube.png"
         className="loginLogo w-[250px] h-[200px]"

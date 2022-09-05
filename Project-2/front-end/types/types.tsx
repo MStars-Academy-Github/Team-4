@@ -5,6 +5,7 @@ export interface LoginProps {
 }
 export interface MainProps {
   setChecker: Dispatch<SetStateAction<boolean | undefined>>;
+  videos: IVideos[] | undefined;
 }
 export interface RegisterProps {
   setComp: Dispatch<SetStateAction<boolean>>;
@@ -25,6 +26,7 @@ export interface InfoProps {
   user: IUser | undefined;
 }
 export interface IVideos {
+  _id: string;
   title: String;
   description: String;
   genre: string;
@@ -32,4 +34,8 @@ export interface IVideos {
   postedBy: string;
   updated: Date;
   created: Date;
+}
+export interface PlayerProps {
+  e: IVideos;
+  i: number;
 }

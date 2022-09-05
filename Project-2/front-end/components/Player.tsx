@@ -1,12 +1,21 @@
+import axios from "axios";
 import React from "react";
 import ReactPlayer from "react-player";
-import { IVideos } from "../types/types";
-export default function Player({ video }: any) {
-  console.log(video);
-
+import { IVideos, PlayerProps } from "../types/types";
+export default function Player({ e, i }: PlayerProps) {
+  console.log(e);
+  axios
+    .get(`http://localhost:4000/v1/media/video/${e._id}`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   return (
-    <div>
-      <ReactPlayer url="https://www.youtube.com/watch?v=7sDY4m8KNLc" controls />
+    <div className="w-[250px] h-[250px]">
+      <p>testing</p>
+      <ReactPlayer controls key={i} />
     </div>
   );
 }

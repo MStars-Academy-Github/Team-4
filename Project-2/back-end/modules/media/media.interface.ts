@@ -1,6 +1,7 @@
 import { Schema, Model } from "mongoose";
 
 export interface IMedia {
+  media: String;
   title: string;
   description: string;
   genre: string;
