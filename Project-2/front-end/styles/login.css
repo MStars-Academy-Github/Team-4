@@ -49,13 +49,17 @@
   height: 250px;
   align-items: center;
 }
-.upload input:nth-child(3) {
+.upload input:nth-child(2) {
   border: 1px solid black;
   border-radius: 10px 10px 10px 10px;
 }
+
 .upload button {
   width: 150px;
   height: 25px;
   border-radius: 10px 10px 10px 10px;
   color: #fff;
+}
+.upload img {
+  width: 350px;
 }

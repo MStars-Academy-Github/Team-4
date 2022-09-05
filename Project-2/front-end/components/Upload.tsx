@@ -38,7 +38,8 @@ export default function Upload() {
     }
   }
   return (
-    <div className="upload w-[100%] min-h-[800px] items-center flex justify-center mx-auto">
+    <div className="upload w-[100%] min-h-[800px] flex-col items-center flex justify-center mx-auto">
+      <img src="./pictures/Chitube.png" alt="" />
       <form
         action="submit"
         className="flex flex-col justify-around border w-[450px] border-solid border-black"
@@ -48,7 +49,7 @@ export default function Upload() {
         encType="multipart/form-data"
       >
         <p>ADD YOUR VIDEO</p>
-        <input type="file" name="media" id="media" />
+
         <input type="text" name="title" id="title" placeholder="title" />
         <select name="genre" id="genre">
           <option value="animation">Animation</option>
@@ -60,6 +61,7 @@ export default function Upload() {
           id="description"
           placeholder="description"
         />
+        <input type="file" name="media" id="media" />
         <button className=" bg-red-500">submit</button>
       </form>
     </div>
