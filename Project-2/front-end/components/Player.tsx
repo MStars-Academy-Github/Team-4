@@ -16,7 +16,7 @@ export default function Player({ e, i }: PlayerProps) {
       console.error(err);
     });
   return (
-    <div className="w-[450px] h-[250px]">
+    <div className="w-[20%] bg-slate-100 h-[250px]">
       <p>testing</p>
       <ReactPlayer
         // url={`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/${item._id}`}
