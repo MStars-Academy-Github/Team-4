@@ -9,18 +9,10 @@ import { IVideos, MainProps } from "../types/types";
 
 const Home: NextPage = () => {
   const [checker, setChecker] = useState<boolean | undefined>();
-  const [videos, setVideos] = useState<IVideos[] | undefined>([]);
+
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setChecker(false);
-      axios
-        .get("http://localhost:4000/v1/media/videos")
-        .then((res) => {
-          setVideos(res.data.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
     } else {
       setChecker(true);
     }
@@ -30,7 +22,7 @@ const Home: NextPage = () => {
       {checker ? (
         <Login setChecker={setChecker} />
       ) : (
-        <Main setChecker={setChecker} videos={videos} />
+        <Main setChecker={setChecker} videos={undefined} />
       )}
     </div>
   );

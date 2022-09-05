@@ -6,7 +6,9 @@ export default function login() {
   return (
     <div>
       <Login
-        setChecker={function (value: SetStateAction<boolean>): void {
+        setChecker={function (
+          value: SetStateAction<boolean | undefined>
+        ): void {
           throw new Error("Function not implemented.");
         }}
       />

@@ -13,7 +13,7 @@ export default function Player({ e, i }: PlayerProps) {
       console.error(err);
     });
   return (
-    <div className="w-[250px] h-[250px]">
+    <div className="w-[450px] h-[250px]">
       <p>testing</p>
       <ReactPlayer controls key={i} />
     </div>

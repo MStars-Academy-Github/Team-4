@@ -38,10 +38,10 @@ export default function Upload() {
     }
   }
   return (
-    <div className="bg-gray-400 w-[40%] flex justify-center mx-auto">
+    <div className="upload w-[100%] min-h-[800px] items-center flex justify-center mx-auto">
       <form
         action="submit"
-        className="flex flex-col"
+        className="flex flex-col justify-around border w-[450px] border-solid border-black"
         onSubmit={(e: any) => {
           submithandler(e);
         }}
@@ -50,14 +50,17 @@ export default function Upload() {
         <p>ADD YOUR VIDEO</p>
         <input type="file" name="media" id="media" />
         <input type="text" name="title" id="title" placeholder="title" />
-        <input type="text" name="genre" id="genre" placeholder="genre" />
+        <select name="genre" id="genre">
+          <option value="animation">Animation</option>
+        </select>
+        {/* <input type="text" name="genre" id="genre" placeholder="genre" /> */}
         <input
           type="text"
           name="description"
           id="description"
           placeholder="description"
         />
-        <button>submit</button>
+        <button className=" bg-red-500">submit</button>
       </form>
     </div>
   );
