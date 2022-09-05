@@ -4,4 +4,5 @@ const router: Router = express.Router();
 
 router.post("/", userController.createUser);
 router.put("/update", userController.updateUser);
+
 export default router;
