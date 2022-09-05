@@ -17,19 +17,30 @@ import LeftSide from "./LeftSide";
 import axios from "axios";
 import Player from "./Player";
 
-export default function Main({ setChecker, videos }: MainProps) {
-  console.log(videos);
+export default function Main({ setChecker }: MainProps) {
+  const [videos, setVideos] = useState<IVideos[] | undefined>([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/v1/media/videos")
+      .then((res) => {
+        setVideos(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
-    <div className="flex">
-      <div>
-        <MainHeader />
+    <div className="">
+      <MainHeader />
+
+      <div className="flex">
         <LeftSide />
-      </div>
-      <div className="">
-        {videos?.map((e: IVideos, i: number) => {
-          return <Player e={e} i={i} />;
-        })}
+        <div>
+          {videos?.map((e: IVideos, i: number) => {
+            return <Player e={e} i={i} />;
+          })}
+        </div>
       </div>
     </div>
   );

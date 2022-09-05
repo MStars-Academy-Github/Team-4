@@ -16,14 +16,6 @@ export default function Header({ setChecker }: HeaderProps) {
       <div className="w-72 flex text-[15px] items-center">
         <input type="button" value="ADD MEDIA" className="w-full mr-1" />
         {/* <p className="w-full mr-1">ADD MEDIA</p> */}
-        <input
-          type="button"
-          value="MY PROFILE"
-          className="w-full mr-1"
-          onClick={() => {
-            router.push("/profile");
-          }}
-        />
 
         <button
           type="button"
@@ -32,6 +24,7 @@ export default function Header({ setChecker }: HeaderProps) {
             setChecker(true);
             localStorage.clear();
           }}
+          className="w-[250px]"
         >
           LOG OUT
         </button>

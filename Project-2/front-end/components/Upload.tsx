@@ -10,6 +10,7 @@ export default function Upload() {
     setUser(res);
   }, []);
 
+  const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
   async function submithandler(e: any) {
     e.preventDefault();
     const formData = new FormData();
@@ -50,7 +51,15 @@ export default function Upload() {
         <p>ADD YOUR VIDEO</p>
         <input type="file" name="media" id="media" />
         <input type="text" name="title" id="title" placeholder="title" />
-        <input type="text" name="genre" id="genre" placeholder="genre" />
+
+        <select name="genre" id="genre">
+          <option value="none" selected disabled hidden>
+            Select a genre
+          </option>
+          {genre.map((e) => {
+            return <option value={e}>{e}</option>;
+          })}
+        </select>
         <input
           type="text"
           name="description"

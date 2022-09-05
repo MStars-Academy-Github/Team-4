@@ -1,3 +1,4 @@
+import { Router, useRouter } from "next/router";
 import React from "react";
 import {
   AiOutlineMenu,
@@ -7,6 +8,7 @@ import {
 import { MdOutlineNotificationsActive } from "react-icons/md";
 
 export default function MainHeader() {
+  const router = useRouter();
   return (
     <div>
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
@@ -33,9 +35,20 @@ export default function MainHeader() {
           </button>
         </form>
         <div className="flex w-[250px] justify-around">
-          <AiOutlineVideoCameraAdd className="w-[25px] h-[25px]" />
+          <AiOutlineVideoCameraAdd
+            className="w-[25px] h-[25px]"
+            onClick={() => {
+              router.push("/upload");
+            }}
+          />
           <MdOutlineNotificationsActive className="w-[25px] h-[25px]" />
-          <p>UserName</p>
+          <p
+            onClick={() => {
+              router.push("/profile");
+            }}
+          >
+            UserName
+          </p>
         </div>
       </div>
       <div className="headerButtons flex justify-around w-full h-[30px] bg-[#fff] border-t-black">
