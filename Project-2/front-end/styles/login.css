@@ -17,6 +17,7 @@
   height: 50px;
   border: 1px solid grey;
   border-radius: 5px 0px 0px 5px;
+  color: #000;
 }
 .searchForm button {
   border: 1px solid grey;
@@ -39,23 +40,53 @@
 .headerButtons button:hover {
   background: gainsboro;
 }
-.upload p {
+.uploads p {
   font-family: Roboto Condensed;
   font-weight: 700;
+  color: #fff;
+  font-size: 25px;
 }
-.upload form {
-  border: 1px solid black;
-  border-radius: 10px 10px 10px 10px;
-  height: 250px;
+.uploads {
+  width: 560px;
+  height: 560px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-.upload input:nth-child(3) {
+.uploads form {
+  border: 4px solid #fff;
+  border-radius: 50%;
+  height: 550px;
+  align-items: center;
+  width: 550px;
+  background: red;
+}
+.uploads input:nth-child(3) {
   border: 1px solid black;
   border-radius: 10px 10px 10px 10px;
+  height: 30px;
 }
-.upload button {
+.uploads input:nth-child(5) {
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+  height: 30px;
+}
+.uploads select {
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+  height: 30px;
+}
+.uploads button {
   width: 150px;
   height: 25px;
   border-radius: 10px 10px 10px 10px;
-  color: #fff;
+  color: #000;
+  background: #fff;
+}
+.uploads form img {
+  width: 150px;
+  height: 100px;
+  margin-right: 30px;
 }

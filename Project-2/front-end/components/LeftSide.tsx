@@ -8,9 +8,9 @@ import {
 
 export default function LeftSide() {
   return (
-    <div className="w-[100px] absolute top-[90px] flex flex-col min-h-[100%] bg-[#fff]">
+    <div className="w-[100px] relative top-[-20px] flex flex-col min-h-[100%] bg-[#fff]">
       <div className="">
-        <div className="w-[100px] h-[50px] text-center mt-3 mb-7 cursor-pointer hover:bg-slate-100">
+        <div className="w-[100px] h-[50px] mt-3 mb-7 text-center cursor-pointer hover:bg-slate-100">
           <AiFillHome className="w-[25px] ml-8 h-[25px]" />
           <p className="ml-[-5px] font-light">Home</p>
         </div>

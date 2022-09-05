@@ -41,13 +41,13 @@ export default function Login({ setChecker }: LoginProps) {
           type="text"
           name="email"
           placeholder="email"
-          className="mb-2 cursor-text"
+          className="mb-2 cursor-text text-black"
         />
         <input
           type="password"
           name="password"
           placeholder="password"
-          className="mb-2 cursor-text"
+          className="mb-2 cursor-text text-black"
         />
         <div className="flex justify-between">
           <button className="text-black cursor-pointer">LOGIN</button>
