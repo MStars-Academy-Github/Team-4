@@ -10,6 +10,7 @@ export default function Upload() {
     setUser(res);
   }, []);
 
+  const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
   async function submithandler(e: any) {
     e.preventDefault();
     const formData = new FormData();
@@ -38,10 +39,10 @@ export default function Upload() {
     }
   }
   return (
-    <div className="upload w-[100%] min-h-[800px] items-center flex justify-center mx-auto">
+    <div className="bg-gray-400 w-[40%] flex justify-center mx-auto">
       <form
         action="submit"
-        className="flex flex-col justify-around border w-[450px] border-solid border-black"
+        className="flex flex-col"
         onSubmit={(e: any) => {
           submithandler(e);
         }}
@@ -50,17 +51,22 @@ export default function Upload() {
         <p>ADD YOUR VIDEO</p>
         <input type="file" name="media" id="media" />
         <input type="text" name="title" id="title" placeholder="title" />
+
         <select name="genre" id="genre">
-          <option value="animation">Animation</option>
+          <option value="none" selected disabled hidden>
+            Select a genre
+          </option>
+          {genre.map((e) => {
+            return <option value={e}>{e}</option>;
+          })}
         </select>
-        {/* <input type="text" name="genre" id="genre" placeholder="genre" /> */}
         <input
           type="text"
           name="description"
           id="description"
           placeholder="description"
         />
-        <button className=" bg-red-500">submit</button>
+        <button>submit</button>
       </form>
     </div>
   );
