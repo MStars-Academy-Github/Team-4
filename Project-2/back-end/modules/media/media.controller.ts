@@ -9,59 +9,70 @@ let gridfs: GridFSBucket;
 mongoose.connection.on("connected", () => {
   gridfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db);
 });
-export async function createMedia(req: Request, res: Response) {
-  const form = new formidable.IncomingForm();
-
-  form.parse(req, async (err: Error, fields: Fields, files: any) => {
-    console.log("test");
-
+export const createMedia = async (req: Request, res: Response) => {
+  let form = new formidable.IncomingForm();
+  form.parse(req, async (err, fields: Fields, files: any) => {
     if (err) {
-      console.error(err);
+      return res.status(400).json({
+        error: "Video could not be uploaded",
+      });
     }
+
     const user = await User.findById(fields.postedBy);
     let media = new Media(fields);
-    media.postedBy = user?._id;
+    media.postedBy = user?.id;
     const file = files["media"];
-    console.log("media");
 
     if (file) {
+      console.log(file);
+
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
         contentType: "binary/octet-stream",
       });
       fs.createReadStream(file.filepath).pipe(writeStream);
     }
-
     try {
       let result = await media.save();
-      return res.status(200).json({
-        data: result,
-      });
-    } catch (err) {
+      res.status(200).json(result);
+    } catch (error) {
       return res.status(400).json({
-        error: "error during upload",
+        error: "Error during file upload",
       });
     }
   });
-}
-export async function getMediaByID(req: Request, res: Response) {
-  const { mediaID } = req.params;
+};
+export const mediaById = async (req: Request, res: Response) => {
+  const { mediaId } = req.params;
+  console.log(mediaId);
+
   try {
-    const media = await Media.findById(mediaID)
-      .populate("postedBy", "_id , firstname , lastname , email")
+    let media = await Media.findById(mediaId)
+      .populate("postedBy", "_id firstName")
       .exec();
     let files = await gridfs
       .find({ filename: media?._id.toString() })
       .toArray();
-    res.json({
-      data: media,
-      files: files,
+    let file = files[0];
+    // console.log(media + " media");
+    // console.log(files + " files");
+
+    res.header("Content-Length", file.length.toString());
+    res.header("Content-Type", file.contentType);
+
+    let downloadStream = gridfs.openDownloadStream(file._id);
+    downloadStream.pipe(res);
+    downloadStream.on("error", () => {
+      res.sendStatus(404);
+    });
+    downloadStream.on("end", () => {
+      res.end();
     });
   } catch (error) {
     return res.status(404).json({
       error: "Could not retrieve media file",
     });
   }
-}
+};
 export async function getMediaByUserId(req: Request, res: Response) {
   const { userID } = req.params;
   try {

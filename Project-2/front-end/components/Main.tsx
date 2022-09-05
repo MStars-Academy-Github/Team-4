@@ -29,7 +29,6 @@ export default function Main({ setChecker }: MainProps) {
         console.error(err);
       });
   }, []);
-  console.log(videos);
 
   return (
     <div>

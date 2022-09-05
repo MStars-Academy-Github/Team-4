@@ -4,6 +4,15 @@ import { IUser } from "../types/types";
 
 export default function Upload() {
   const [user, setUser] = useState<IUser>();
+  const [values, setValues] = useState({
+    title: "",
+    video: "",
+    description: "",
+    genre: "",
+    redirect: false,
+    error: "",
+    mediaId: "",
+  });
   useEffect(() => {
     const res = JSON.parse(localStorage.getItem("user") || "");
 
@@ -11,31 +20,44 @@ export default function Upload() {
   }, []);
 
   const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
+  const handleChange = (name: any) => (event: any) => {
+    console.log(name);
+
+    const value = name === "video" ? event.target.files[0] : event.target.value;
+    setValues({ ...values, [name]: value });
+  };
   async function submithandler(e: any) {
+    console.log(values);
+
     e.preventDefault();
     const formData = new FormData();
     if (user) {
-      formData.append("media", e.target.media.value);
+      console.log(values);
+
+      formData.append("media", values.video as any);
       formData.append("title", e.target.title.value);
       formData.append("genre", e.target.genre.value);
       formData.append("description", e.target.description.value);
       formData.append("postedBy", user?._id);
       // formData.append("postedBy" )
-      console.log(formData);
+      console.log(values.video);
 
-      axios({
-        method: "post",
-        url: "http://localhost:4000/v1/media/upload",
-        data: formData,
+      console.log(e.target[0].value.slice(12));
 
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      // axios({
+      //   method: "post",
+      //   url: "http://localhost:4000/v1/media/upload",
+      //   data: formData,
+
+      //   headers: { "Content-Type": "multipart/form-data" },
+      // })
+      //   .then((res) => {
+      //     console.log(formData);
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
     }
   }
   return (
@@ -49,7 +71,12 @@ export default function Upload() {
         encType="multipart/form-data"
       >
         <p>ADD YOUR VIDEO</p>
-        <input type="file" name="media" id="media" />
+        <input
+          accept="video/*"
+          type="file"
+          onChange={handleChange("video")}
+          id="icon-button-file"
+        />
         <input type="text" name="title" id="title" placeholder="title" />
 
         <select name="genre" id="genre">
