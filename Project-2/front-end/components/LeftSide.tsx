@@ -8,30 +8,25 @@ import {
 
 export default function LeftSide() {
   return (
-    <div>
-      {" "}
-      <div>
-        <div className="w-[100px] absolute top-[70px] min-h-[100%] bg-[#fff]">
-          <div className="">
-            <div className="w-[100px] h-[50px] text-center mt-3 mb-7 cursor-pointer hover:bg-slate-100">
-              <AiFillHome className="w-[25px] ml-8 h-[25px]" />
-              <p className="ml-[-5px] font-light">Home</p>
-            </div>
-            <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
-              <MdOutlineExplore className="w-[25px] ml-8 h-[25px]" />
-              <p className="ml-[-10px] font-light">Explore</p>
-            </div>
-            <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
-              <MdSubscriptions className="w-[25px] ml-8 h-[25px]" />
-              <p className="w-[100px] font-light h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
-                Subscriptions
-              </p>
-            </div>
-            <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
-              <MdOutlineVideoLibrary className="w-[25px] ml-8 h-[25px]" />
-              <p className="ml-[-8px] font-light">Library</p>
-            </div>
-          </div>
+    <div className="w-[100px] flex flex-col min-h-[100%] bg-[#fff]">
+      <div className="">
+        <div className="w-[100px] h-[50px] text-center mt-3 mb-7 cursor-pointer hover:bg-slate-100">
+          <AiFillHome className="w-[25px] ml-8 h-[25px]" />
+          <p className="ml-[-5px] font-light">Home</p>
+        </div>
+        <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
+          <MdOutlineExplore className="w-[25px] ml-8 h-[25px]" />
+          <p className="ml-[-10px] font-light">Explore</p>
+        </div>
+        <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
+          <MdSubscriptions className="w-[25px] ml-8 h-[25px]" />
+          <p className="w-[100px] font-light h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
+            Subscriptions
+          </p>
+        </div>
+        <div className="w-[100px] h-[50px] text-center mb-7 cursor-pointer hover:bg-slate-100">
+          <MdOutlineVideoLibrary className="w-[25px] ml-8 h-[25px]" />
+          <p className="ml-[-8px] font-light">Library</p>
         </div>
       </div>
     </div>
