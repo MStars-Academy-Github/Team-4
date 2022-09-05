@@ -24,3 +24,12 @@ export interface IUser {
 export interface InfoProps {
   user: IUser | undefined;
 }
+export interface IVideos {
+  title: String;
+  description: String;
+  genre: string;
+  views: number;
+  postedBy: string;
+  updated: Date;
+  created: Date;
+}

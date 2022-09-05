@@ -78,3 +78,15 @@ export async function getMediaByUserId(req: Request, res: Response) {
     });
   }
 }
+export async function getAllVideo(req: Request, res: Response) {
+  try {
+    const videos = await Media.find();
+    res.json({
+      data: videos,
+    });
+  } catch {
+    return res.status(404).json({
+      error: "bad request",
+    });
+  }
+}

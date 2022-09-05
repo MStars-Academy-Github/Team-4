@@ -1,5 +1,5 @@
-import React from "react";
-import { MainProps } from "../types/types";
+import React, { useEffect, useState } from "react";
+import { MainProps, IVideos } from "../types/types";
 import {
   AiOutlineMenu,
   AiOutlineSearch,
@@ -12,11 +12,27 @@ import {
   MdSubscriptions,
   MdOutlineVideoLibrary,
 } from "react-icons/md";
+import ReactPlayer from "react-player";
+import axios from "axios";
+import Player from "./Player";
 
 export default function Main({ setChecker }: MainProps) {
+  const [videos, setVideos] = useState<IVideos[] | undefined>([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/v1/media/videos")
+      .then((res) => {
+        setVideos(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [videos]);
+  console.log(videos);
+
   return (
     <div>
-      <div className="header flex justify-around absolute top-0 bg-[#fff] w-[100%] min-h-[70px]">
+      <div className="header flex justify-around  top-0 bg-[#fff] w-[100%] min-h-[70px]">
         <div className="flex absolute top-[-6px] left-[33px]">
           <AiOutlineMenu className="w-[25px] absolute top-[30px]  h-[25px] cursor-pointer" />
           <a href="/">
@@ -49,7 +65,7 @@ export default function Main({ setChecker }: MainProps) {
         </div>
       </div>
       <br className="w-5 min-h-10 text-black" />
-      <div className="headerButtons absolute border-t-black">
+      <div className="headerButtons  border-t-black">
         <button>All</button>
         <button>Gaming</button>
         <button>Music</button>
@@ -80,6 +96,11 @@ export default function Main({ setChecker }: MainProps) {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        {videos?.map((e) => {
+          return <Player video={e} />;
+        })}
       </div>
     </div>
   );

@@ -26,4 +26,17 @@ const Home: NextPage = () => {
   );
 };
 
+// Home.getInitialProps = async () => {
+//   const res = await fetch("http://localhost:4000/v1/media/videos").then(
+//     (res) => {
+//       console.log(res);
+//     }
+//   );
+//   const videos = res;
+//   console.log(videos);
+//   return {
+//     videos: videos,
+//   };
+// };
+
 export default Home;
