@@ -18,6 +18,7 @@ import Player from "./Player";
 import dynamic from "next/dynamic";
 
 export default function Main({ setChecker }: MainProps) {
+
   return (
     <div>
       <div>

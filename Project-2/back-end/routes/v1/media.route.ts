@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/upload", mediaController.createMedia);
 router.get("/videos", mediaController.getAllVideo);
-router.get("/video/:mediaID", mediaController.getMediaByID);
+router.get("/video/:mediaId", mediaController.mediaById);
 router.get("/video/by/:userID", mediaController.getMediaByUserId);
 export default router;
