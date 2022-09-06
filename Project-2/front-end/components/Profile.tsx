@@ -11,6 +11,9 @@ export default function Profile() {
   const [comps, setComps] = useState<number>(0);
   const [result, setResult] = useState<IVideos[] | []>([]);
   const [res, setRes] = useState<boolean>();
+  const [checker, setChecker] = useState<boolean>(false);
+  const [edit, setEdit] = useState<IVideos>();
+
   useEffect(() => {
     if (localStorage) {
       setUser(JSON.parse(localStorage.getItem("user") || ""));
@@ -27,9 +30,32 @@ export default function Profile() {
         });
     }
   }, [comps]);
-  function clickHandler(e: IVideos) {
-    console.log(e);
+  function editHandler(e: any) {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const description = e.target.description.value;
+    axios
+      .put(`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/edit`, {
+        _id: edit?._id,
+        title: title,
+        description: description,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    console.log(title, description);
   }
+  function deleteHandler(e: any) {
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/delete/${e._id}`)
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
   return (
     <div>
       <Header
@@ -93,14 +119,29 @@ export default function Profile() {
                     <input
                       type="button"
                       value={e.title}
-                      onClick={() => {
-                        clickHandler(e);
-                      }}
+                      onClick={() => {}}
+                      disabled
                     />
                     {/* {e.title} */}
-                    <div className="flex justify-between">
-                      <button type="button">edit</button>
-                      <button type="button">delete</button>
+                    <div className="flex justify-between w-24">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          console.log(checker);
+                          setEdit(e);
+                          setChecker(true);
+                        }}
+                      >
+                        edit
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          deleteHandler(e);
+                        }}
+                      >
+                        delete
+                      </button>
                     </div>
                   </div>
                 );
@@ -111,6 +152,37 @@ export default function Profile() {
           )}
         </div>
       </div>
+      {checker ? (
+        <form
+          action="submit"
+          className="flex flex-col mx-10 mt-5 border border-black rounded p-4"
+          onSubmit={(e: any) => {
+            editHandler(e);
+          }}
+        >
+          <h5>EDIT </h5>
+          <hr />
+          <p>Title</p>
+          <input
+            type="text"
+            placeholder={edit?.title}
+            id="title"
+            name="title"
+            className="bg-black text-white"
+          />
+          <p className="mt-5">Description</p>
+          <hr />
+          <input
+            type="text"
+            placeholder={edit?.description.slice(0)}
+            id="description"
+            name="description"
+          />
+          <button>SUBMIT</button>
+        </form>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

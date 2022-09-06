@@ -5,6 +5,8 @@ export default function ChangePass({ user }: InfoProps) {
   const [number, setNumber] = useState<number>(0);
   async function submitHandler(e: any) {
     e.preventDefault();
+    console.log(e.target[0].value);
+
     if (number == 0) {
       /** email update hiideg end-point garga */
     } else {
@@ -53,7 +55,7 @@ export default function ChangePass({ user }: InfoProps) {
           {number == 0 ? (
             <div className="text-white">
               <p>{user?.email}</p>
-              <input type="email" name="" id="" placeholder="New Email" />
+              <input type="text" name="" id="" placeholder="New Email" />
             </div>
           ) : (
             <div>
