@@ -44,7 +44,7 @@ export default function MainHeader({ getSearchValue }: any) {
   return (
     <>
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
-        <div className="flex w-[250px] items-center min-h-[70px] ml-8">
+        <div className="flex w-[200px] items-center min-h-[70px] ml-8">
           <AiOutlineMenu
             onClick={ToggleSidebar}
             className="w-[25px] mb-3 h-[25px] cursor-pointer"
