@@ -47,12 +47,14 @@ export const mediaById = async (req: Request, res: Response) => {
 
   try {
     let media = await Media.findById(mediaId)
-      .populate("postedBy", "_id , firstname")
+      .populate("postedBy", "_id  , firstName")
       .exec();
     let files = await gridfs
       .find({ filename: media?._id.toString() })
       .toArray();
     let file = files[0];
+    console.log(media);
+
     // console.log(media + " media");
     // console.log(files + " files");
     console.log(media);
@@ -92,7 +94,7 @@ export async function getMediaByUserId(req: Request, res: Response) {
 export async function getAllVideo(req: Request, res: Response) {
   try {
     const videos = await Media.find()
-      .populate("postedBy", "_id , firstname")
+      .populate("postedBy", "_id , firstname , lastname")
       .exec();
     res.json({
       data: videos,
@@ -101,5 +103,37 @@ export async function getAllVideo(req: Request, res: Response) {
     return res.status(404).json({
       error: "bad request",
     });
+  }
+}
+export async function editMedia(req: Request, res: Response) {
+  const body = req.body;
+  console.log(body._id);
+  const id = body._id;
+  try {
+    const media = await Media.findById(id.toString());
+    console.log(media);
+
+    await Media.updateOne(
+      { _id: media?._id },
+      {
+        title: body.title,
+        description: body.description,
+      }
+    );
+    res.send({ media });
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteMedia(req: Request, res: Response) {
+  const { videoID } = req.params;
+  try {
+    const media = await Media.findById(videoID);
+    await Media.deleteOne({ _id: media?._id });
+    res.json({
+      message: "video deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
   }
 }
