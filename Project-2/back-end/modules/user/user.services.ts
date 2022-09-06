@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IUserDoc } from "./user.interface";
 import User from "./user.model";
+import bcrypt from "bcryptjs";
 
 export function createUser(body: any) {
   if (getUserByEmail(body.email) == null) {
@@ -15,3 +16,14 @@ export function updateUser(body: any) {
 }
 export const getUserByEmail = async (email: string): Promise<IUserDoc | null> =>
   User.findOne({ email: email });
+export async function editPassword(body: any) {
+  // if (user.isModified("password")) {
+  //   user.password = await bcrypt.hash(user.password, 8);
+  // }
+  console.log(body.password);
+
+  const password = await bcrypt.hash(body.password, 8);
+  console.log(password);
+
+  User.updateOne({});
+}

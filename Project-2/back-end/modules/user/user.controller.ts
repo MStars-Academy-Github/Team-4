@@ -12,3 +12,9 @@ export const updateUser = async (req: Request, res: Response) => {
   const data = await userService.updateUser(req.body.data);
   res.send(data);
 };
+export async function editPassword(req: Request, res: Response) {
+  console.log(req.body.data);
+
+  const data = await userService.editPassword(req.body.data);
+  res.send(data);
+}
