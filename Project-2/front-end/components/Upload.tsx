@@ -21,8 +21,6 @@ export default function Upload() {
 
   const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
   const handleChange = (name: any) => (event: any) => {
-    console.log(name);
-
     const value = name === "video" ? event.target.files[0] : event.target.value;
     setValues({ ...values, [name]: value });
   };
@@ -39,25 +37,21 @@ export default function Upload() {
       formData.append("genre", e.target.genre.value);
       formData.append("description", e.target.description.value);
       formData.append("postedBy", user?._id);
-      // formData.append("postedBy" )
-      console.log(values.video);
 
-      console.log(e.target[0].value.slice(12));
+      axios({
+        method: "post",
+        url: "http://localhost:4000/v1/media/upload",
+        data: formData,
 
-      // axios({
-      //   method: "post",
-      //   url: "http://localhost:4000/v1/media/upload",
-      //   data: formData,
-
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // })
-      //   .then((res) => {
-      //     console.log(formData);
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((res) => {
+          console.log(formData);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }
   return (

@@ -13,6 +13,8 @@ export default function Profile() {
   useEffect(() => {
     if (localStorage) {
       setUser(JSON.parse(localStorage.getItem("user") || ""));
+      console.log(user?._id + "");
+
       axios
         .get(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/by/${user?._id}`
@@ -22,7 +24,7 @@ export default function Profile() {
           setResult(res.data.data);
         });
     }
-  }, []);
+  }, [result]);
 
   return (
     <div>
@@ -82,11 +84,7 @@ export default function Profile() {
           ) : comps == 2 ? (
             <div>
               {result?.map((e: IVideos, i: number) => {
-                return (
-                  <div>
-                    <Player e={e} i={i} />
-                  </div>
-                );
+                return <div>{e.title}</div>;
               })}
             </div>
           ) : (
