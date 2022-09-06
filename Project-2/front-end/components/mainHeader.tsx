@@ -14,7 +14,7 @@ import dynamic from "next/dynamic";
 import { IVideos } from "../types/types";
 import Toggle from "./Toggle";
 
-export default function MainHeader({ getSearchValue }: any) {
+export default function MainHeader({ getSearchValue, filterHandler }: any) {
   const router = useRouter();
   const [isOpen, setIsopen] = useState(false);
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
@@ -22,16 +22,7 @@ export default function MainHeader({ getSearchValue }: any) {
   const buttons = ["Gaming", "Music", "Animation", "Nature", "Mixes"];
 
   function fliterHandler(e: string) {
-    const filters: IVideos[] = [];
-    console.log(e);
-    videos?.forEach((p: IVideos) => {
-      if (p.genre == e) {
-        filters.push(p);
-      } else {
-        console.log("no such video");
-      }
-    });
-    console.log(filters);
+    filterHandler(e);
   }
   function searchHandler(e: any) {
     e.preventDefault();

@@ -50,11 +50,26 @@ export default function Main({ setChecker }: MainProps) {
     }
     setChecker(false);
   }
+  function filterHandler(e: string) {
+    const filters: IVideos[] = [];
+    console.log(e);
+
+    videos?.forEach((p: IVideos) => {
+      if (p.genre == e) {
+        filters.push(p);
+        console.log(filters);
+      }
+    });
+    setVideos(filters);
+  }
 
   return (
     <div>
       <div>
-        <MainHeader getSearchValue={getSearchValue} />
+        <MainHeader
+          getSearchValue={getSearchValue}
+          filterHandler={filterHandler}
+        />
         <LeftSide />
       </div>
       <div className="flex absolute w-full h-[700px] top-[150px] left-[100px] bg-[#f9f9f9] flex-wrap justify-around">
