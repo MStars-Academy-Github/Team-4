@@ -8,8 +8,7 @@ export default function Player({ e, i }: PlayerProps) {
   const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
   return (
-    <div className="w-[450px] h-[250px]">
-      <p>testing</p>
+    <div className="w-[350px] h-[200px]">
       <ReactPlayer
         controls
         key={i}

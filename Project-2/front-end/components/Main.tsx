@@ -1,19 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { MainProps, IVideos } from "../types/types";
-import {
-  AiOutlineMenu,
-  AiOutlineSearch,
-  AiOutlineVideoCameraAdd,
-  AiFillHome,
-} from "react-icons/ai";
-import {
-  MdOutlineNotificationsActive,
-  MdOutlineExplore,
-  MdSubscriptions,
-  MdOutlineVideoLibrary,
-} from "react-icons/md";
 import MainHeader from "./mainHeader";
-import LeftSide from "./LeftSide";
 import axios from "axios";
 import Player from "./Player";
 
@@ -55,9 +42,8 @@ export default function Main({ setChecker }: MainProps) {
     <div>
       <div>
         <MainHeader getSearchValue={getSearchValue} />
-        <LeftSide />
       </div>
-      <div className="flex absolute w-full h-[700px] top-[150px] left-[100px] bg-[#f9f9f9] flex-wrap justify-around">
+      <div className="flex  w-full h-[700px] bg-[#f9f9f9] flex-wrap justify-around">
         {(checking ? videos : search)?.map((e: IVideos, i: number) => {
           return (
             <div>

@@ -42,7 +42,7 @@ export default function MainHeader({ getSearchValue }: any) {
   };
 
   return (
-    <div>
+    <>
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
         <div className="flex w-[250px] items-center min-h-[70px] ml-8">
           <AiOutlineMenu
@@ -91,11 +91,10 @@ export default function MainHeader({ getSearchValue }: any) {
           />
         </div>
       </div>
-
       <div className="flex  w-full ">
         {isOpen == true ? <Toggle /> : <LeftSide />}
         <div className="flex flex-wrap w-full">
-          <div className="headerButtons flex justify-around w-100 h-[50px] bg-[#fff] border-t-black">
+          <div className="headerButtons flex justify-around w-full h-[50px] bg-[#fff] border-t-black">
             <button className="hover:bg-slate-100">All</button>
             {buttons.map((e: string) => {
               return (
@@ -113,6 +112,6 @@ export default function MainHeader({ getSearchValue }: any) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
