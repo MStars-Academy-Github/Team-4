@@ -13,8 +13,9 @@ import Player from "./Player";
 import dynamic from "next/dynamic";
 import { IVideos } from "../types/types";
 import Toggle from "./Toggle";
+import { Main } from "next/document";
 
-export default function MainHeader({ getSearchValue }: any) {
+export default function MainHeader({ getSearchValue, filterHandler }: any) {
   const router = useRouter();
   const [isOpen, setIsopen] = useState(false);
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
@@ -22,16 +23,7 @@ export default function MainHeader({ getSearchValue }: any) {
   const buttons = ["Gaming", "Music", "Animation", "Nature", "Mixes"];
 
   function fliterHandler(e: string) {
-    const filters: IVideos[] = [];
-    console.log(e);
-    videos?.forEach((p: IVideos) => {
-      if (p.genre == e) {
-        filters.push(p);
-      } else {
-        console.log("no such video");
-      }
-    });
-    console.log(filters);
+    filterHandler(e);
   }
   function searchHandler(e: any) {
     e.preventDefault();
@@ -44,15 +36,15 @@ export default function MainHeader({ getSearchValue }: any) {
   return (
     <>
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
-        <div className="flex w-[200px] items-center min-h-[70px] ml-8">
+        <div className="flex justify-between w-[200px] items-center min-h-[70px] ml-8">
           <AiOutlineMenu
             onClick={ToggleSidebar}
             className="w-[25px] mb-3 h-[25px] cursor-pointer"
           />
-          <a href="/">
+          <a href="/" className="w-[150px] mr-3 h-[100px]">
             <img
               src="./pictures/Chitube.png"
-              className="w-[150px] ml-5 h-[100px]"
+              className="w-[150px] h-[100px]"
               alt=""
             />
           </a>

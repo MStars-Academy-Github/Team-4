@@ -21,8 +21,6 @@ export default function Upload() {
 
   const genre = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
   const handleChange = (name: any) => (event: any) => {
-    console.log(name);
-
     const value = name === "video" ? event.target.files[0] : event.target.value;
     setValues({ ...values, [name]: value });
   };
@@ -39,62 +37,77 @@ export default function Upload() {
       formData.append("genre", e.target.genre.value);
       formData.append("description", e.target.description.value);
       formData.append("postedBy", user?._id);
-      // formData.append("postedBy" )
-      console.log(values.video);
 
-      console.log(e.target[0].value.slice(12));
+      axios({
+        method: "post",
+        url: "http://localhost:4000/v1/media/upload",
+        data: formData,
 
-      // axios({
-      //   method: "post",
-      //   url: "http://localhost:4000/v1/media/upload",
-      //   data: formData,
-
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // })
-      //   .then((res) => {
-      //     console.log(formData);
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((res) => {
+          console.log(formData);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }
   return (
-    <div className="bg-gray-400 w-[40%] flex justify-center mx-auto">
-      <form
-        action="submit"
-        className="flex flex-col"
-        onSubmit={(e: any) => {
-          submithandler(e);
-        }}
-        encType="multipart/form-data"
-      >
-        <p>ADD YOUR VIDEO</p>
-        <input
-          accept="video/*"
-          type="file"
-          onChange={handleChange("video")}
-          id="icon-button-file"
-        />
-        <input type="text" name="title" id="title" placeholder="title" />
+    <div>
+      <img
+        src="./pictures/Chitube.png"
+        className="w-[250px] h-[200px] m-auto"
+        alt=""
+      />
+      <div className=" bg-red-500 w-[570px] h-[570px] rounded-full flex justify-center items-center mx-auto">
+        <div className="bg-red-500 w-[560px] h-[560px] rounded-full flex items-center flex-col border-4 border-white">
+          <form
+            action="submit"
+            className="flex justify-around w-[350px] h-[400px] mt-5 items-center flex-col"
+            onSubmit={(e: any) => {
+              submithandler(e);
+            }}
+            encType="multipart/form-data"
+          >
+            <p className=" text-[#fff]">ADD YOUR VIDEO</p>
 
-        <select name="genre" id="genre">
-          <option value="none" selected disabled hidden>
-            Select a genre
-          </option>
-          {genre.map((e) => {
-            return <option value={e}>{e}</option>;
-          })}
-        </select>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          placeholder="description"
-        />
-        <button>submit</button>
-      </form>
+            <input
+              className="rounded-md"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="title"
+            />
+
+            <select className="rounded-md" name="genre" id="genre">
+              <option value="none" selected disabled hidden>
+                Select a genre
+              </option>
+              {genre.map((e) => {
+                return <option value={e}>{e}</option>;
+              })}
+            </select>
+            <input
+              className="rounded-md"
+              type="text"
+              name="description"
+              id="description"
+              placeholder="description"
+            />
+            <input
+              accept="video/*"
+              type="file"
+              onChange={handleChange("video")}
+              id="icon-button-file"
+            />
+            <button className=" rounded-md bg-[#fff] w-[150px] text-red-500">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

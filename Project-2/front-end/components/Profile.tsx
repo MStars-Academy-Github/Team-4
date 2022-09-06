@@ -13,6 +13,8 @@ export default function Profile() {
   useEffect(() => {
     if (localStorage) {
       setUser(JSON.parse(localStorage.getItem("user") || ""));
+      console.log(user?._id + "");
+
       axios
         .get(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/by/${user?._id}`
@@ -22,7 +24,7 @@ export default function Profile() {
           setResult(res.data.data);
         });
     }
-  }, []);
+  }, [result]);
 
   return (
     <div>
@@ -30,10 +32,11 @@ export default function Profile() {
         setChecker={function (value: SetStateAction<boolean | undefined>) {}}
       />
       <div className="flex justify-around">
-        <div className="bg-gray-400 w-[40%] items-center flex-col mt-10 ml-5 h-[300px] border rounded">
-          <h3 className="pl-5 pt-5">USERNAME</h3>
-          <div className="pl-8 justify-start items-start  bg-slate-400 mt-2 mb-2 flex-col flex">
+        <div className=" bg-red-500 w-[20%] items-center flex-col mt-10 ml-5 h-[300px] border rounded">
+          <h3 className="pl-5 pt-5 text-[#fff]">Username: {user?.firstName}</h3>
+          <div className="pl-8 justify-start items-start mt-2 mb-2 flex-col flex">
             <button
+              className="text-[#fff]"
               type="button"
               onClick={() => {
                 setComps(0);
@@ -43,6 +46,7 @@ export default function Profile() {
               CHANGE INFO
             </button>
             <button
+              className="text-[#fff]"
               type="button"
               onClick={() => {
                 setComps(1);
@@ -52,6 +56,7 @@ export default function Profile() {
               CHANGE YOUR EMAIL OR PASSWORD
             </button>
             <button
+              className="text-[#fff]"
               type="button"
               onClick={() => {
                 setComps(2);
@@ -61,6 +66,7 @@ export default function Profile() {
               YOUR VIDEOS
             </button>
             <button
+              className="text-[#fff]"
               type="button"
               onClick={() => {
                 setComps(3);
@@ -74,7 +80,7 @@ export default function Profile() {
             DELETE ACCOUNT
           </button>
         </div>
-        <div className="w-[50%] mt-10 bg-slate-200 text-black rounded p-5">
+        <div className="w-[20%] mt-10 bg-black text-red-500 rounded p-5">
           {comps == 0 ? (
             <Infos user={user} />
           ) : comps == 1 ? (
@@ -82,11 +88,7 @@ export default function Profile() {
           ) : comps == 2 ? (
             <div>
               {result?.map((e: IVideos, i: number) => {
-                return (
-                  <div>
-                    <Player e={e} i={i} />
-                  </div>
-                );
+                return <div>{e.title}</div>;
               })}
             </div>
           ) : (

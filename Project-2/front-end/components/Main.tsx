@@ -37,11 +37,26 @@ export default function Main({ setChecker }: MainProps) {
     }
     setChecker(false);
   }
+  function filterHandler(e: string) {
+    const filters: IVideos[] = [];
+    console.log(e);
+
+    videos?.forEach((p: IVideos) => {
+      if (p.genre == e) {
+        filters.push(p);
+        console.log(filters);
+      }
+    });
+    setVideos(filters);
+  }
 
   return (
     <div>
       <div>
-        <MainHeader getSearchValue={getSearchValue} />
+        <MainHeader
+          getSearchValue={getSearchValue}
+          filterHandler={filterHandler}
+        />
       </div>
       <div className="flex  w-full h-[700px] bg-[#f9f9f9] flex-wrap justify-around">
         {(checking ? videos : search)?.map((e: IVideos, i: number) => {
