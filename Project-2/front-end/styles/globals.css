@@ -60,3 +60,9 @@ a {
     background: black;
   }
 }
+.player {
+  width: 450px !important;
+  height: 300px !important;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}

@@ -20,9 +20,7 @@ export default function Profile() {
       console.log(user?._id);
 
       axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/by/${user?._id}`
-        )
+        .get(`http://localhost:4000/v1/media/video/by/${user?._id}`)
         .then((res) => {
           console.log(res.data.data);
           setResult(res.data.data);

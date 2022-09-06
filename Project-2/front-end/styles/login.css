@@ -30,10 +30,14 @@
   border-top: grey;
   border-top-style: solid;
 }
+.headerButtonsToggle {
+  position: relative;
+  left: 150px;
+}
 .headerButtons button {
   margin-top: 10px;
   border: 1px solid grey;
-  width: 80px;
+  width: 150px;
   height: 30px;
   border-radius: 20px 20px 20px 20px;
   background: rgba(0, 0, 0, 0.05);

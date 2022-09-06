@@ -5,27 +5,26 @@ import { HeaderProps } from "../types/types";
 export default function Header({ setChecker }: HeaderProps) {
   const router = useRouter();
   return (
-    <div className=" bg-white h-16 text-black flex align-middle justify-around ">
-      <h1
+    <div className=" bg-white text-black w-full h-[100px] flex align-middle justify-around ">
+      <img
+        src="./pictures/Chitube.png"
+        className=" cursor-pointer w-[150px] h-[100px] mt-2"
+        alt=""
         onClick={() => {
           router.push("/");
         }}
-      >
-        MediaStream
-      </h1>
-      <div className="w-72 flex text-[15px] items-center">
-        <input type="button" value="ADD MEDIA" className="w-full mr-1" />
-        {/* <p className="w-full mr-1">ADD MEDIA</p> */}
+      />
+      <div className="w-[250px] justify-between h-[100px] flex  items-center">
         <input
           type="button"
-          value="MY PROFILE"
-          className="w-full mr-1"
+          value="ADD MEDIA"
           onClick={() => {
-            router.push("/profile");
+            router.push("/upload");
           }}
+          className="w-[100px] mr-1 cursor-pointer"
         />
-
         <button
+          className=" text-red-500 w-[100px]"
           type="button"
           onClick={() => {
             router.push("/");

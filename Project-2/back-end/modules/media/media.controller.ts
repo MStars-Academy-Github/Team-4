@@ -57,6 +57,7 @@ export const mediaById = async (req: Request, res: Response) => {
 
     // console.log(media + " media");
     // console.log(files + " files");
+    console.log(media);
 
     res.header("Content-Length", file.length.toString());
     res.header("Content-Type", file.contentType);
