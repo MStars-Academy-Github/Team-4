@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { SetStateAction } from "react";
-import { IUser } from "../types/types";
+import { IUser, IVideos } from "../types/types";
 import Infos from "./Infos";
 import ChangePass from "./ChangePass";
+import axios from "axios";
+import Player from "./Player";
 export default function Profile() {
   const [user, setUser] = useState<IUser>();
   const [comps, setComps] = useState<number>(0);
+  const [result, setResult] = useState<IVideos[] | []>([]);
   useEffect(() => {
     if (localStorage) {
       setUser(JSON.parse(localStorage.getItem("user") || ""));
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/by/${user?._id}`
+        )
+        .then((res) => {
+          console.log(res.data.data);
+          setResult(res.data.data);
+        });
     }
   }, []);
 
@@ -26,7 +37,7 @@ export default function Profile() {
               type="button"
               onClick={() => {
                 setComps(0);
-                console.log("working");
+                // console.log("working");
               }}
             >
               CHANGE INFO
@@ -35,7 +46,7 @@ export default function Profile() {
               type="button"
               onClick={() => {
                 setComps(1);
-                console.log("working");
+                // console.log("working");
               }}
             >
               CHANGE YOUR EMAIL OR PASSWORD
@@ -44,7 +55,7 @@ export default function Profile() {
               type="button"
               onClick={() => {
                 setComps(2);
-                console.log("working");
+                // console.log("working");
               }}
             >
               YOUR VIDEOS
@@ -53,7 +64,7 @@ export default function Profile() {
               type="button"
               onClick={() => {
                 setComps(3);
-                console.log("working");
+                // console.log("working");
               }}
             >
               YOUR LIKED VIDEOS
@@ -69,7 +80,15 @@ export default function Profile() {
           ) : comps == 1 ? (
             <ChangePass user={user} />
           ) : comps == 2 ? (
-            "lorem2"
+            <div>
+              {result?.map((e: IVideos, i: number) => {
+                return (
+                  <div>
+                    <Player e={e} i={i} />
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             "lorem3"
           )}
