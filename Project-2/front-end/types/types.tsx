@@ -27,7 +27,7 @@ export interface InfoProps {
 }
 export interface IVideos {
   _id: string;
-  title: String;
+  title: string;
   description: String;
   genre: string;
   views: number;

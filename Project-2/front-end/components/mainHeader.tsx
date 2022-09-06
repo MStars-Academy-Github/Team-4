@@ -9,31 +9,37 @@ import {
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { RiUserReceivedLine } from "react-icons/ri";
 import LeftSide from "./LeftSide";
-import Toggle from "./Toggle";
 import Player from "./Player";
 import dynamic from "next/dynamic";
 import { IVideos } from "../types/types";
+import Toggle from "./Toggle";
 
-export default function MainHeader() {
+export default function MainHeader({ getSearchValue }: any) {
   const router = useRouter();
   const [isOpen, setIsopen] = useState(false);
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
-  const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
+  const buttons = ["Gaming", "Music", "Animation", "Nature", "Mixes"];
+
+  function fliterHandler(e: string) {
+    const filters: IVideos[] = [];
+    console.log(e);
+    videos?.forEach((p: IVideos) => {
+      if (p.genre == e) {
+        filters.push(p);
+      } else {
+        console.log("no such video");
+      }
+    });
+    console.log(filters);
+  }
+  function searchHandler(e: any) {
+    e.preventDefault();
+    getSearchValue(e.target[0].value);
+  }
   const ToggleSidebar = () => {
     isOpen === true ? setIsopen(false) : setIsopen(true);
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/v1/media/videos")
-      .then((res) => {
-        setVideos(res.data.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
 
   return (
     <div>
@@ -51,7 +57,13 @@ export default function MainHeader() {
             />
           </a>
         </div>
-        <form action="" className="searchForm flex ">
+        <form
+          action=""
+          className="searchForm flex "
+          onSubmit={(e: any) => {
+            searchHandler(e);
+          }}
+        >
           <input
             type="search"
             className=""
@@ -80,20 +92,25 @@ export default function MainHeader() {
         </div>
       </div>
 
-      <div className="flex  w-full justify-between">
+      <div className="flex  w-full ">
         {isOpen == true ? <Toggle /> : <LeftSide />}
-        <div className="flex flex-wrap">
-          <div className="headerButtons flex justify-around w-full h-[50px] bg-[#fff] border-t-black">
+        <div className="flex flex-wrap w-full">
+          <div className="headerButtons flex justify-around w-100 h-[50px] bg-[#fff] border-t-black">
             <button className="hover:bg-slate-100">All</button>
-            <button>Gaming</button>
-            <button>Music</button>
-            <button>Mixes</button>
-            <button>Nature</button>
-            <button>Cartoon</button>
+            {buttons.map((e: string) => {
+              return (
+                <button
+                  type="button"
+                  value={e}
+                  onClick={() => {
+                    fliterHandler(e);
+                  }}
+                >
+                  {e}
+                </button>
+              );
+            })}
           </div>
-          {videos?.map((e: IVideos, i: number) => {
-            return <Player e={e} i={i} />;
-          })}
         </div>
       </div>
     </div>

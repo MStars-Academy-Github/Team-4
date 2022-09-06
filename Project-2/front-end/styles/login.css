@@ -26,6 +26,7 @@
   border-radius: 0px 5px 5px 0px;
 }
 .headerButtons {
+  width: 100vw;
   border-top: grey;
   border-top-style: solid;
 }

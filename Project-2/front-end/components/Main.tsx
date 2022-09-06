@@ -19,6 +19,9 @@ import Player from "./Player";
 
 export default function Main({ setChecker }: MainProps) {
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
+  const [search, setSearch] = useState<IVideos[] | any[]>([]);
+  const [checking, setChecking] = useState<boolean>(true);
+  const [values, setValues] = useState<string>("");
   useEffect(() => {
     axios
       .get("http://localhost:4000/v1/media/videos")
@@ -29,16 +32,39 @@ export default function Main({ setChecker }: MainProps) {
         console.error(err);
       });
   }, []);
+  function getSearchValue(e: string) {
+    setSearch([]);
+    videos?.forEach((p: IVideos, i: number) => {
+      if (p.title.includes(e)) {
+        if (search && search.includes(p)) {
+          console.log("video exists");
+        } else {
+          setSearch([...search, p]);
+        }
+      }
+    });
+    if (search.length <= 0) {
+      console.log("no video within this search");
+      setValues("haisan bichleg bhgu");
+      setChecker(true);
+    }
+    setChecker(false);
+  }
 
   return (
     <div>
       <div>
-        <MainHeader />
+        <MainHeader getSearchValue={getSearchValue} />
         <LeftSide />
       </div>
       <div className="flex absolute w-full h-[700px] top-[150px] left-[100px] bg-[#f9f9f9] flex-wrap justify-around">
-        {videos?.map((e: IVideos, i: number) => {
-          return <Player e={e} i={i} />;
+        {(checking ? videos : search)?.map((e: IVideos, i: number) => {
+          return (
+            <div>
+              <p>{values}</p>
+              <Player e={e} i={i} />
+            </div>
+          );
         })}
       </div>
     </div>
