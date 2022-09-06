@@ -10,10 +10,11 @@ export default function Profile() {
   const [user, setUser] = useState<IUser>();
   const [comps, setComps] = useState<number>(0);
   const [result, setResult] = useState<IVideos[] | []>([]);
+  const [res, setRes] = useState<boolean>();
   useEffect(() => {
     if (localStorage) {
       setUser(JSON.parse(localStorage.getItem("user") || ""));
-      console.log(user?._id + "");
+      console.log(user?._id);
 
       axios
         .get(
@@ -22,10 +23,13 @@ export default function Profile() {
         .then((res) => {
           console.log(res.data.data);
           setResult(res.data.data);
+          setRes(true);
         });
     }
-  }, [result]);
-
+  }, [comps]);
+  function clickHandler(e: IVideos) {
+    console.log(e);
+  }
   return (
     <div>
       <Header
@@ -88,7 +92,22 @@ export default function Profile() {
           ) : comps == 2 ? (
             <div>
               {result?.map((e: IVideos, i: number) => {
-                return <div>{e.title}</div>;
+                return (
+                  <div className="flex justify-between">
+                    <input
+                      type="button"
+                      value={e.title}
+                      onClick={() => {
+                        clickHandler(e);
+                      }}
+                    />
+                    {/* {e.title} */}
+                    <div className="flex justify-between">
+                      <button type="button">edit</button>
+                      <button type="button">delete</button>
+                    </div>
+                  </div>
+                );
               })}
             </div>
           ) : (

@@ -7,8 +7,9 @@ import Player from "./Player";
 export default function Main({ setChecker }: MainProps) {
   const [videos, setVideos] = useState<IVideos[] | undefined>([]);
   const [search, setSearch] = useState<IVideos[] | any[]>([]);
-  const [checking, setChecking] = useState<boolean>(true);
+  const [checking, setChecking] = useState<number>(0);
   const [values, setValues] = useState<string>("");
+  const [temp, setTemp] = useState<IVideos[] | []>(videos ? videos : []);
   useEffect(() => {
     axios
       .get("http://localhost:4000/v1/media/videos")
@@ -33,9 +34,9 @@ export default function Main({ setChecker }: MainProps) {
     if (search.length <= 0) {
       console.log("no video within this search");
       setValues("haisan bichleg bhgu");
-      setChecker(true);
+      setChecking(0);
     }
-    setChecker(false);
+    setChecking(1);
   }
   function filterHandler(e: string) {
     const filters: IVideos[] = [];
@@ -47,7 +48,10 @@ export default function Main({ setChecker }: MainProps) {
         console.log(filters);
       }
     });
-    setVideos(filters);
+    if (filters.length > 0) {
+      setChecking(2);
+    }
+    setTemp(filters);
   }
 
   return (
@@ -56,17 +60,21 @@ export default function Main({ setChecker }: MainProps) {
         <MainHeader
           getSearchValue={getSearchValue}
           filterHandler={filterHandler}
+          setChecking={setChecking}
+          videos={videos}
         />
       </div>
-      <div className="flex  w-full h-[700px] bg-[#f9f9f9] flex-wrap justify-around">
-        {(checking ? videos : search)?.map((e: IVideos, i: number) => {
-          return (
-            <div>
-              <p>{values}</p>
-              <Player e={e} i={i} />
-            </div>
-          );
-        })}
+      <div className="flex absolute w-full h-[700px] top-[150px] left-[100px] bg-[#f9f9f9] flex-wrap justify-around">
+        {(checking == 0 ? videos : checking == 1 ? search : temp)?.map(
+          (e: IVideos, i: number) => {
+            return (
+              <div>
+                <p>{values}</p>
+                <Player e={e} i={i} />
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
