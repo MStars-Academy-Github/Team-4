@@ -53,9 +53,6 @@ export default function Profile() {
         console.log(res);
       });
   }
-  function changePassword(e: any) {
-    axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/change`, {});
-  }
 
   return (
     <div>
