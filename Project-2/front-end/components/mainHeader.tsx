@@ -9,11 +9,7 @@ import {
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { RiUserReceivedLine } from "react-icons/ri";
 import LeftSide from "./LeftSide";
-import Player from "./Player";
-import dynamic from "next/dynamic";
-import { IVideos } from "../types/types";
 import Toggle from "./Toggle";
-import { Main } from "next/document";
 
 export default function MainHeader({
   getSearchValue,
@@ -22,7 +18,6 @@ export default function MainHeader({
   videos,
 }: any) {
   const router = useRouter();
-  const [isOpen, setIsopen] = useState(false);
 
   const buttons = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
 
@@ -33,26 +28,18 @@ export default function MainHeader({
     e.preventDefault();
     getSearchValue(e.target[0].value);
   }
-  const ToggleSidebar = () => {
-    isOpen === true ? setIsopen(false) : setIsopen(true);
-  };
 
   return (
     <>
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
-        <div className="flex justify-between w-[200px] items-center min-h-[70px] ml-8">
-          <AiOutlineMenu
-            onClick={ToggleSidebar}
-            className="w-[25px] mb-3 h-[25px] cursor-pointer"
+        <a href="/" className="w-[150px] ml-[70px] h-[100px]">
+          <img
+            src="./pictures/Chitube.png"
+            className="w-[150px] h-[100px]"
+            alt=""
           />
-          <a href="/" className="w-[150px] mr-3 h-[100px]">
-            <img
-              src="./pictures/Chitube.png"
-              className="w-[150px] h-[100px]"
-              alt=""
-            />
-          </a>
-        </div>
+        </a>
+
         <form
           action=""
           className="searchForm flex "
@@ -87,33 +74,28 @@ export default function MainHeader({
           />
         </div>
       </div>
-      <div className="flex  w-full ">
-        {isOpen == true ? <Toggle /> : <LeftSide />}
-        <div className="flex flex-wrap w-full">
-          <div className="headerButtons flex justify-around w-100 h-[50px] bg-[#fff] border-t-black">
+      <div className="headerButtons relative flex justify-around w-100 h-[50px] bg-[#fff] border-t-black">
+        <button
+          className="hover:bg-slate-100"
+          onClick={() => {
+            setChecking(0);
+          }}
+        >
+          All
+        </button>
+        {buttons.map((e: string) => {
+          return (
             <button
-              className="hover:bg-slate-100"
+              type="button"
+              value={e}
               onClick={() => {
-                setChecking(0);
+                fliterHandler(e);
               }}
             >
-              All
+              {e}
             </button>
-            {buttons.map((e: string) => {
-              return (
-                <button
-                  type="button"
-                  value={e}
-                  onClick={() => {
-                    fliterHandler(e);
-                  }}
-                >
-                  {e}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+          );
+        })}
       </div>
     </>
   );

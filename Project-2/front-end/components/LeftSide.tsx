@@ -8,7 +8,7 @@ import {
 
 export default function LeftSide() {
   return (
-    <div className="w-[100px] relative top-[-20px] flex flex-col min-h-[100%] bg-[#fff]">
+    <div className="w-[100px] relative top-[-70px] flex flex-col min-h-[100%] bg-[#fff]">
       <div className="">
         <div className="w-[100px] h-[50px] mt-3 mb-7 text-center cursor-pointer hover:bg-slate-100">
           <AiFillHome className="w-[25px] ml-8 h-[25px]" />

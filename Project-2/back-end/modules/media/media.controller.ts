@@ -47,7 +47,7 @@ export const mediaById = async (req: Request, res: Response) => {
 
   try {
     let media = await Media.findById(mediaId)
-      .populate("postedBy", "_id firstName")
+      .populate("postedBy", "_id , firstname")
       .exec();
     let files = await gridfs
       .find({ filename: media?._id.toString() })
@@ -55,6 +55,7 @@ export const mediaById = async (req: Request, res: Response) => {
     let file = files[0];
     // console.log(media + " media");
     // console.log(files + " files");
+    console.log(media);
 
     res.header("Content-Length", file.length.toString());
     res.header("Content-Type", file.contentType);
@@ -90,7 +91,9 @@ export async function getMediaByUserId(req: Request, res: Response) {
 }
 export async function getAllVideo(req: Request, res: Response) {
   try {
-    const videos = await Media.find();
+    const videos = await Media.find()
+      .populate("postedBy", "_id , firstname")
+      .exec();
     res.json({
       data: videos,
     });
