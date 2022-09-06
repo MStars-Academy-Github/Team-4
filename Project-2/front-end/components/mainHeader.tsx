@@ -14,12 +14,16 @@ import dynamic from "next/dynamic";
 import { IVideos } from "../types/types";
 import Toggle from "./Toggle";
 
-export default function MainHeader({ getSearchValue, filterHandler }: any) {
+export default function MainHeader({
+  getSearchValue,
+  filterHandler,
+  setChecking,
+  videos,
+}: any) {
   const router = useRouter();
   const [isOpen, setIsopen] = useState(false);
-  const [videos, setVideos] = useState<IVideos[] | undefined>([]);
 
-  const buttons = ["Gaming", "Music", "Animation", "Nature", "Mixes"];
+  const buttons = ["Animation", "Music", "Gaming", "Entertainment", "Comedy"];
 
   function fliterHandler(e: string) {
     filterHandler(e);
@@ -87,7 +91,14 @@ export default function MainHeader({ getSearchValue, filterHandler }: any) {
         {isOpen == true ? <Toggle /> : <LeftSide />}
         <div className="flex flex-wrap w-full">
           <div className="headerButtons flex justify-around w-100 h-[50px] bg-[#fff] border-t-black">
-            <button className="hover:bg-slate-100">All</button>
+            <button
+              className="hover:bg-slate-100"
+              onClick={() => {
+                setChecking(0);
+              }}
+            >
+              All
+            </button>
             {buttons.map((e: string) => {
               return (
                 <button
