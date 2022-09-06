@@ -1,15 +1,8 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import {
-  AiOutlineMenu,
-  AiOutlineSearch,
-  AiOutlineVideoCameraAdd,
-} from "react-icons/ai";
+import React, { useEffect } from "react";
+import { AiOutlineSearch, AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { RiUserReceivedLine } from "react-icons/ri";
-import LeftSide from "./LeftSide";
-import Toggle from "./Toggle";
 
 export default function MainHeader({
   getSearchValue,
@@ -28,9 +21,24 @@ export default function MainHeader({
     e.preventDefault();
     getSearchValue(e.target[0].value);
   }
+  useEffect(() => {
+    window.onscroll = function () {
+      myFunction();
+    };
+
+    function myFunction() {
+      var header: any = document.getElementById("myHeader");
+      var sticky: any = header?.offsetTop;
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header?.classList.remove("sticky");
+      }
+    }
+  });
 
   return (
-    <>
+    <div id="myHeader">
       <div className="header flex justify-between items-center bg-[#fff] w-[100%] min-h-[70px]">
         <a href="/" className="w-[150px] ml-[70px] h-[100px]">
           <img
@@ -97,6 +105,6 @@ export default function MainHeader({
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

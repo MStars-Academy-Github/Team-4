@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import {
   MdOutlineExplore,
@@ -10,7 +10,10 @@ import {
 
 export default function Toggle() {
   return (
-    <div className="w-[250px] relative top-[-70px] flex flex-col h-full bg-[#fff]">
+    <div
+      id="myToggle"
+      className="w-[250px] relative top-[-70px] flex flex-col h-full bg-[#fff]"
+    >
       <div className="w-[200px] h-[50px] flex justify-between items-center text-center mt-3 mb-7 cursor-pointer hover:bg-slate-100">
         <AiFillHome className="w-[25px] ml-8 h-[25px]" />
         <p className="mr-4 font-light">Home</p>

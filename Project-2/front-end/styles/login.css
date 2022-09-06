@@ -95,3 +95,11 @@
   height: 100px;
   margin-right: 30px;
 }
+
+.sticky {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}
