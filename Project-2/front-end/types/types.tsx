@@ -13,6 +13,7 @@ export interface RegisterProps {
 export interface HeaderProps {
   setChecker: Dispatch<SetStateAction<boolean | undefined>>;
 }
+
 export interface IUser {
   _id: string;
   firstName: string;
@@ -31,7 +32,9 @@ export interface IVideos {
   description: String;
   genre: string;
   views: number;
-  postedBy: string;
+  postedBy: {
+    firstname: string;
+  };
   updated: Date;
   created: Date;
 }

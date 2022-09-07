@@ -78,7 +78,7 @@ export default function Main({ setChecker }: MainProps) {
       />
       <div className="flex">
         {isOpen == true ? <Toggle /> : <LeftSide />}
-        <div className="flex  w-full h-[700px] bg-[#f9f9f9] flex-wrap justify-around">
+        <div className="flex  w-full ml-20 h-[700px] bg-[#f9f9f9] flex-wrap justify-around">
           {(checking == 0 ? videos : checking == 1 ? search : temp)?.map(
             (e: IVideos, i: number) => {
               return (
