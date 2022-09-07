@@ -8,12 +8,13 @@ export default function Infos({ user }: InfoProps) {
    */
   console.log(user);
   async function submitHandler(e: any) {
+    e.preventDefault();
     console.log(e);
     const data = {
-      firstName: e.target[0].value,
-      lastName: e.target[1].value,
-      phone: e.target[0].value,
-      register: e.target[0].value,
+      firstname: e.target[0].value || user?.firstname,
+      lastname: e.target[1].value || user?.lastname,
+      phone: e.target[2].value || user?.phone,
+      register: e.target[3].value || user?.register,
     };
     axios
       .put("http://localhost:4000/v1/user/update", { data })
@@ -33,8 +34,8 @@ export default function Infos({ user }: InfoProps) {
           submitHandler(e);
         }}
       >
-        <input type="text" placeholder={user?.firstName} />
-        <input type="text" placeholder={user?.lastName} />
+        <input type="text" placeholder={user?.firstname} />
+        <input type="text" placeholder={user?.lastname} />
         <input type="number" placeholder={user?.phone.toString()} />
         <input type="text" placeholder={user?.register} />
         <button>UPDATE</button>
