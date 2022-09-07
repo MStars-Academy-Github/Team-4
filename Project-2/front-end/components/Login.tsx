@@ -8,7 +8,7 @@ export default function Login({ setChecker }: LoginProps) {
   async function submitHandler(e: any) {
     e.preventDefault();
     localStorage.clear();
-    console.log(e.target[0].value);
+
     const data = { email: e.target[0].value, password: e.target[1].value };
     axios
       .post("http://localhost:4000/v1/auth/login", { data })
@@ -17,6 +17,8 @@ export default function Login({ setChecker }: LoginProps) {
         if (res.data.success && res.data !== "undefined") {
           localStorage.setItem("user", JSON.stringify(res.data.user));
           setChecker(false);
+        } else {
+          alert(res.data.message);
         }
       })
       .catch((err) => {

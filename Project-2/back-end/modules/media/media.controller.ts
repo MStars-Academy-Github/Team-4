@@ -137,3 +137,20 @@ export async function deleteMedia(req: Request, res: Response) {
     console.error(error);
   }
 }
+export async function addViews(req: Request, res: Response) {
+  const body = req.body;
+  try {
+    const media = await Media.findById(body._id);
+    if (media) {
+      const count = media?.views + 1;
+      await Media.updateOne({ _id: media?._id }, { views: count });
+      res.json({
+        message: "view added",
+      });
+    } else {
+      res.json({ message: "media not found" });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
