@@ -24,8 +24,6 @@ export const createMedia = async (req: Request, res: Response) => {
     const file = files["media"];
 
     if (file) {
-      console.log(file);
-
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
         contentType: "binary/octet-stream",
       });
@@ -43,8 +41,8 @@ export const createMedia = async (req: Request, res: Response) => {
 };
 export const mediaById = async (req: Request, res: Response) => {
   const { mediaId } = req.params;
-  console.log(mediaId);
 
+  const range = req.headers["range"];
   try {
     let media = await Media.findById(mediaId)
       .populate("postedBy", "_id  , firstName")
@@ -53,23 +51,45 @@ export const mediaById = async (req: Request, res: Response) => {
       .find({ filename: media?._id.toString() })
       .toArray();
     let file = files[0];
-    console.log(media);
+    if (range && typeof range === "string") {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const partialStart = parts[0];
+      const partialEnd = parts[1];
+      const start = parseInt(partialStart, 10);
+      const end = partialEnd ? parseInt(partialEnd, 10) : file.length - 1;
+      const chunkSize = end - start + 1;
 
-    // console.log(media + " media");
-    // console.log(files + " files");
-    console.log(media);
+      res.writeHead(206, {
+        "Accept-Ranges": "bytes",
+        "Content-Length": chunkSize.toString(),
+        "Content-Range": "bytes " + start + "-" + end + "/" + file.length,
+        "Content-Type": file.contentType,
+      });
+      let downloadStream = gridfs.openDownloadStream(file._id, {
+        start,
+        end: end + 1,
+      });
+      downloadStream.pipe(res);
+      downloadStream.on("error", () => {
+        res.sendStatus(404);
+      });
+      downloadStream.on("end", () => {
+        res.end();
+      });
+    } else {
+      // whole chunk of videos
+      res.header("Content-Length", file.length.toString());
+      res.header("Content-Type", file.contentType);
 
-    res.header("Content-Length", file.length.toString());
-    res.header("Content-Type", file.contentType);
-
-    let downloadStream = gridfs.openDownloadStream(file._id);
-    downloadStream.pipe(res);
-    downloadStream.on("error", () => {
-      res.sendStatus(404);
-    });
-    downloadStream.on("end", () => {
-      res.end();
-    });
+      let downloadStream = gridfs.openDownloadStream(file._id);
+      downloadStream.pipe(res);
+      downloadStream.on("error", () => {
+        res.sendStatus(404);
+      });
+      downloadStream.on("end", () => {
+        res.end();
+      });
+    }
   } catch (error) {
     return res.status(404).json({
       error: "Could not retrieve media file",
@@ -107,11 +127,9 @@ export async function getAllVideo(req: Request, res: Response) {
 }
 export async function editMedia(req: Request, res: Response) {
   const body = req.body;
-  console.log(body._id);
   const id = body._id;
   try {
     const media = await Media.findById(id.toString());
-    console.log(media);
 
     await Media.updateOne(
       { _id: media?._id },
