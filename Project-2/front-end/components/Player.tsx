@@ -42,7 +42,7 @@ export default function Player({ e, i }: PlayerProps) {
       />
       {/* <PlayerControls/> */}
       <div className="flex flex-col">
-        <h2 className=" font-bold text-xl ml-3">{e.description}</h2>
+        <h2 className=" font-bold text-xl ml-3">{e.title}</h2>
         {/* <p className="ml-3 font-thin">{e.postedBy.firstname}</p> */}
         <p className="ml-3 font-thin">
           {e.views} views &#183; {e.created.toString().slice(0, 10)}

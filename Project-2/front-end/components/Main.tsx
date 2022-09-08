@@ -24,23 +24,29 @@ export default function Main({ setChecker }: MainProps) {
         console.error(err);
       });
   }, []);
-  function getSearchValue(e: string) {
+  async function getSearchValue(e: string) {
+    let tempSearch: IVideos[] = [];
     setSearch([]);
+    console.log(search);
+
     videos?.forEach((p: IVideos, i: number) => {
       if (p.title.includes(e)) {
-        if (search && search.includes(p)) {
+        // debugger;
+        if (tempSearch && tempSearch.includes(p)) {
           console.log("video exists");
-        } else {
-          setSearch([...search, p]);
         }
+        tempSearch.push(p);
+        setSearch(tempSearch);
+        console.log("added");
       }
     });
-    if (search.length <= 0) {
+    if (search.length == 0) {
       console.log("no video within this search");
       setValues("haisan bichleg bhgu");
       setChecking(0);
+    } else {
+      setChecking(1);
     }
-    setChecking(1);
   }
   function filterHandler(e: string) {
     const filters: IVideos[] = [];
